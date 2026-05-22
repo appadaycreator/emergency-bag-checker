@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>非常持ち出し袋チェッカー【無料】防災グッズの準備状況を確認</title>
+  <meta name="description" content="非常持ち出し袋チェッカー。地震・台風・水害に備えた防災グッズの準備状況をチェック。家族構成・住環境に合わせたカスタマイズリスト対応。無料で使えます。">
+  <link rel="canonical" href="https://appadaycreator.github.io/emergency-bag-checker/">
+  <meta property="og:title" content="非常持ち出し袋チェッカー【無料】防災グッズの準備状況を確認">
+  <meta property="og:description" content="地震・台風に備えた防災グッズの準備状況をチェック。家族構成に合わせたカスタマイズリストに対応。">
+  <meta property="og:url" content="https://appadaycreator.github.io/emergency-bag-checker/">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎒</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TXQGZRF9');</script>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","s3t9vl8h3v");</script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8427583028015858" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans JP', 'Inter', sans-serif; background: linear-gradient(135deg, #1a0d00 0%, #2d1a00 50%, #1a1000 100%); min-height: 100vh; color: #fff8e1; }
+    header { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); padding: 1rem 1.5rem; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    header h1 { font-size: 1.6rem; color: #fff; font-weight: 700; }
+    header p { font-size: 0.9rem; color: #ffcc80; margin-top: 0.3rem; }
+    main { max-width: 900px; margin: 0 auto; padding: 1.5rem; }
+    .card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .card h2 { font-size: 1.15rem; color: #fff; margin-bottom: 1rem; font-weight: 700; }
+    .score-display { text-align: center; padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 1rem; }
+    .score-num { font-size: 4rem; font-weight: 700; color: #ffd740; line-height: 1; }
+    .score-label { font-size: 1rem; color: #ffcc80; margin-top: 0.3rem; }
+    .score-bar { margin-top: 0.8rem; }
+    .score-bar-bg { background: rgba(255,255,255,0.1); border-radius: 10px; height: 16px; overflow: hidden; }
+    .score-bar-fill { height: 100%; border-radius: 10px; transition: width 0.8s; }
+    .score-bar-fill.low { background: linear-gradient(90deg, #c62828, #e53935); }
+    .score-bar-fill.mid { background: linear-gradient(90deg, #e65100, #ff9800); }
+    .score-bar-fill.high { background: linear-gradient(90deg, #2e7d32, #66bb6a); }
+    .score-bar-fill.max { background: linear-gradient(90deg, #1565c0, #42a5f5); }
+    .category-section { margin-bottom: 1.5rem; }
+    .cat-header { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); border-radius: 10px; padding: 0.7rem 1rem; margin-bottom: 0.5rem; cursor: pointer; }
+    .cat-title { font-size: 0.95rem; font-weight: 700; color: #fff; }
+    .cat-progress { font-size: 0.82rem; color: #ffcc80; }
+    .item-list { display: flex; flex-direction: column; gap: 0.4rem; padding: 0.2rem 0; }
+    .item-row { display: flex; align-items: center; gap: 0.7rem; padding: 0.5rem 0.8rem; background: rgba(255,255,255,0.03); border-radius: 8px; transition: background 0.2s; }
+    .item-row:hover { background: rgba(255,255,255,0.06); }
+    .item-checkbox { width: 20px; height: 20px; accent-color: #ff9800; cursor: pointer; flex-shrink: 0; }
+    .item-label { flex: 1; font-size: 0.9rem; color: #ccc; cursor: pointer; }
+    .item-label.checked { color: #aaa; text-decoration: line-through; }
+    .item-priority { font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 10px; font-weight: 600; flex-shrink: 0; }
+    .p-critical { background: rgba(198,40,40,0.3); color: #ef9a9a; border: 1px solid rgba(198,40,40,0.4); }
+    .p-high { background: rgba(230,81,0,0.3); color: #ffe0b2; border: 1px solid rgba(230,81,0,0.4); }
+    .p-medium { background: rgba(245,127,23,0.3); color: #fff9c4; border: 1px solid rgba(245,127,23,0.4); }
+    .item-note { font-size: 0.75rem; color: #888; margin-top: 0.1rem; }
+    .family-filter { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+    .family-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #ccc; font-size: 0.82rem; padding: 0.35rem 0.8rem; border-radius: 20px; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+    .family-btn.active { background: rgba(255,152,0,0.3); border-color: #ffcc80; color: #fff; }
+    .btn { display: block; width: 100%; padding: 0.85rem; background: linear-gradient(90deg, #e65100, #ff9800); color: #fff; font-size: 1rem; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; margin-top: 1rem; font-family: inherit; }
+    .btn:hover { opacity: 0.9; }
+    .tips-list { list-style: none; }
+    .tips-list li { padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.9rem; color: #ccc; }
+    .tips-list li::before { content: "🚨 "; }
+    footer { background: rgba(0,0,0,0.3); text-align: center; padding: 2rem 1rem; margin-top: 2rem; color: #888; font-size: 0.85rem; }
+    footer a { color: #ffcc80; text-decoration: none; }
+    footer .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TXQGZRF9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<header>
+  <h1>🎒 非常持ち出し袋チェッカー</h1>
+  <p>地震・台風・水害に備えた防災グッズの準備状況をチェック</p>
+</header>
+
+<main>
+  <!-- スコア表示 -->
+  <section class="card">
+    <h2>📊 防災準備スコア</h2>
+    <div class="score-display">
+      <div class="score-num" id="scoreNum">0</div>
+      <div class="score-label" id="scoreLabel">チェックリストを確認してください</div>
+      <div class="score-bar" style="max-width:300px;margin:0.8rem auto 0;">
+        <div class="score-bar-bg">
+          <div class="score-bar-fill low" id="scoreBar" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="family-filter">
+      <span style="font-size:0.85rem;color:#ffcc80;align-self:center;">家族構成：</span>
+      <button class="family-btn active" onclick="filterFamily(this,'all')">全員共通</button>
+      <button class="family-btn" onclick="filterFamily(this,'baby')">＋乳幼児</button>
+      <button class="family-btn" onclick="filterFamily(this,'elderly')">＋高齢者</button>
+      <button class="family-btn" onclick="filterFamily(this,'pet')">＋ペット</button>
+      <button class="family-btn" onclick="filterFamily(this,'medical')">＋持病あり</button>
+    </div>
+    <button class="btn" onclick="resetAll()">チェックをすべてリセット</button>
+  </section>
+
+  <!-- チェックリスト -->
+  <div id="checklistContainer"></div>
+
+  <!-- 防災Tips -->
+  <section class="card">
+    <h2>💡 防災対策の基本</h2>
+    <ul class="tips-list">
+      <li>非常持ち出し袋は玄関や寝室に置き、すぐ持ち出せる場所に</li>
+      <li>水・食料は「3日分」を最低限用意（理想は1週間分）</li>
+      <li>避難場所と避難経路を家族全員で事前に確認しておく</li>
+      <li>ハザードマップで自宅周辺のリスクを把握する</li>
+      <li>非常持ち出し袋は年1回（9月1日・防災の日）に中身を点検・更新</li>
+      <li>携帯電話の充電は常に70%以上を維持する習慣を</li>
+      <li>家族の連絡先・集合場所は紙に書いてバッグに入れておく</li>
+      <li>近所の方と日頃からつながりを持っておくと有事に助かる</li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <div class="links">
+    <a href="https://appadaycreator.github.io/disaster-preparedness-checker/">防災準備チェッカー</a>
+    <a href="https://appadaycreator.github.io/packing-checklist/">パッキングチェックリスト</a>
+    <a href="https://appadaycreator.github.io/insurance-check/">保険チェック</a>
+    <a href="https://appadaycreator.github.io/vaccine-chatbot/">ワクチン情報</a>
+    <a href="https://appadaycreator.github.io/medical-expense-advisor/">医療費アドバイザー</a>
+  </div>
+  <p>© 2025 AppADayCreator</p>
+</footer>
+
+<script>
+const CHECKLIST = [
+  { cat: '💧 水・食料（最重要）', items: [
+    { id:'w1', text:'飲料水（1人1日3L × 3日分）', priority:'critical', family:['all'], note:'2Lペットボトルを家族分確保' },
+    { id:'w2', text:'非常食・乾パン・レトルト（3日分）', priority:'critical', family:['all'], note:'カロリーメイト・缶詰など' },
+    { id:'w3', text:'水の浄化グッズ（浄水フィルター・浄水錠）', priority:'high', family:['all'] },
+    { id:'w4', text:'赤ちゃん用粉ミルク・離乳食', priority:'critical', family:['baby'] },
+    { id:'w5', text:'高齢者向け介護食・栄養補助食品', priority:'high', family:['elderly'] },
+    { id:'w6', text:'ペット用水・ペットフード（3日分）', priority:'critical', family:['pet'] },
+  ]},
+  { cat: '🩺 救急・医療', items: [
+    { id:'m1', text:'救急セット（絆創膏・ガーゼ・包帯・消毒液）', priority:'critical', family:['all'] },
+    { id:'m2', text:'常備薬（頭痛薬・胃薬・解熱剤）', priority:'high', family:['all'] },
+    { id:'m3', text:'体温計・血圧計（小型）', priority:'medium', family:['all'] },
+    { id:'m4', text:'持病の薬（最低7日分）', priority:'critical', family:['medical'] },
+    { id:'m5', text:'お薬手帳（コピー可）', priority:'high', family:['medical'] },
+    { id:'m6', text:'おむつ・おしりふき', priority:'critical', family:['baby'] },
+    { id:'m7', text:'高齢者用おむつ・衛生用品', priority:'high', family:['elderly'] },
+    { id:'m8', text:'ペット用薬・ペット手帳', priority:'high', family:['pet'] },
+  ]},
+  { cat: '🔦 ライト・電源', items: [
+    { id:'l1', text:'懐中電灯（LED・電池式）', priority:'critical', family:['all'] },
+    { id:'l2', text:'電池（単1〜単4 各種）', priority:'critical', family:['all'] },
+    { id:'l3', text:'モバイルバッテリー（大容量10,000mAh以上）', priority:'critical', family:['all'] },
+    { id:'l4', text:'ランタン（テント用等）', priority:'high', family:['all'] },
+    { id:'l5', text:'ラジオ（電池・手動発電式）', priority:'high', family:['all'] },
+    { id:'l6', text:'ろうそく・ライター', priority:'medium', family:['all'] },
+  ]},
+  { cat: '📄 書類・現金', items: [
+    { id:'d1', text:'現金（硬貨含む1〜2万円）', priority:'critical', family:['all'], note:'ATM・カード使用不可に備えて' },
+    { id:'d2', text:'身分証のコピー（免許・保険証・マイナンバー）', priority:'critical', family:['all'] },
+    { id:'d3', text:'通帳・保険証券のコピー', priority:'high', family:['all'] },
+    { id:'d4', text:'家族の連絡先リスト（紙に書いたもの）', priority:'critical', family:['all'] },
+    { id:'d5', text:'ハザードマップ・避難場所の地図', priority:'high', family:['all'] },
+    { id:'d6', text:'母子手帳・医療情報のコピー', priority:'critical', family:['baby'] },
+  ]},
+  { cat: '👗 衣類・生活用品', items: [
+    { id:'c1', text:'着替え（3日分・防寒着含む）', priority:'high', family:['all'] },
+    { id:'c2', text:'レインコート・雨具', priority:'high', family:['all'] },
+    { id:'c3', text:'軍手・作業用手袋', priority:'high', family:['all'] },
+    { id:'c4', text:'ビニール袋（大中小各種）', priority:'medium', family:['all'] },
+    { id:'c5', text:'ウェットティッシュ・消臭剤', priority:'medium', family:['all'] },
+    { id:'c6', text:'アルコール消毒液・マスク', priority:'high', family:['all'] },
+    { id:'c7', text:'ロープ・ガムテープ', priority:'medium', family:['all'] },
+    { id:'c8', text:'ペット用キャリーバッグ・リード', priority:'critical', family:['pet'] },
+  ]},
+  { cat: '📱 通信・情報収集', items: [
+    { id:'t1', text:'スマートフォンの充電ケーブル', priority:'critical', family:['all'] },
+    { id:'t2', text:'防水スマホカバー・防水ケース', priority:'high', family:['all'] },
+    { id:'t3', text:'ラジオアプリの設定・使い方確認', priority:'medium', family:['all'] },
+    { id:'t4', text:'警戒レベルアラートの設定（ヤフー防災等）', priority:'high', family:['all'] },
+  ]},
+];
+
+let checkedItems = JSON.parse(localStorage.getItem('emergencyChecked') || '{}');
+let activeFamily = 'all';
+
+function filterFamily(btn, family) {
+  document.querySelectorAll('.family-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeFamily = family;
+  renderChecklist();
+}
+
+function isVisible(item) {
+  if (activeFamily === 'all') return item.family.includes('all');
+  return item.family.includes('all') || item.family.includes(activeFamily);
+}
+
+function renderChecklist() {
+  let html = '';
+  CHECKLIST.forEach(cat => {
+    const visItems = cat.items.filter(isVisible);
+    if (!visItems.length) return;
+    const checkedCount = visItems.filter(i => checkedItems[i.id]).length;
+    const pct = Math.round(checkedCount / visItems.length * 100);
+    html += `<div class="card category-section">
+      <div class="cat-header">
+        <div class="cat-title">${cat.cat}</div>
+        <div class="cat-progress">${checkedCount}/${visItems.length} (${pct}%)</div>
+      </div>
+      <div class="item-list">
+        ${visItems.map(item => {
+          const cls = ['critical','high','medium'].includes(item.priority) ? `p-${item.priority}` : '';
+          const label = { critical:'必須', high:'重要', medium:'推奨' }[item.priority] || '';
+          const isChecked = !!checkedItems[item.id];
+          return `<div class="item-row">
+            <input type="checkbox" class="item-checkbox" id="cb-${item.id}" ${isChecked?'checked':''} onchange="toggle('${item.id}')">
+            <label for="cb-${item.id}" class="item-label ${isChecked?'checked':''}">
+              ${item.text}
+              ${item.note ? `<div class="item-note">💡 ${item.note}</div>` : ''}
+            </label>
+            <span class="item-priority ${cls}">${label}</span>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  });
+  document.getElementById('checklistContainer').innerHTML = html;
+  updateScore();
+}
+
+function toggle(id) {
+  checkedItems[id] = !checkedItems[id];
+  if (!checkedItems[id]) delete checkedItems[id];
+  localStorage.setItem('emergencyChecked', JSON.stringify(checkedItems));
+  // Update the label class without full re-render
+  const cb = document.getElementById('cb-' + id);
+  const label = cb?.nextElementSibling;
+  if (label) {
+    if (checkedItems[id]) label.classList.add('checked');
+    else label.classList.remove('checked');
+  }
+  updateScore();
+}
+
+function updateScore() {
+  const allItems = CHECKLIST.flatMap(c => c.items.filter(isVisible));
+  const checkedCount = allItems.filter(i => checkedItems[i.id]).length;
+  const pct = Math.round(checkedCount / allItems.length * 100);
+  document.getElementById('scoreNum').textContent = pct + '%';
+  const bar = document.getElementById('scoreBar');
+  bar.style.width = pct + '%';
+  bar.className = 'score-bar-fill ' + (pct < 30 ? 'low' : pct < 60 ? 'mid' : pct < 90 ? 'high' : 'max');
+  const label = pct < 30 ? '⚠️ 準備が不十分です。今すぐ始めましょう！' :
+    pct < 60 ? '📋 準備中です。もう少し揃えましょう。' :
+    pct < 90 ? '👍 だいぶ揃ってきました。残りも確認を！' :
+    '✅ 素晴らしい！万全の備えができています！';
+  document.getElementById('scoreLabel').textContent = `${checkedCount}/${allItems.length}項目 - ${label}`;
+  // Update cat progress
+  CHECKLIST.forEach(cat => {
+    const visItems = cat.items.filter(isVisible);
+    if (!visItems.length) return;
+    const cc = visItems.filter(i => checkedItems[i.id]).length;
+  });
+}
+
+function resetAll() {
+  if (!confirm('全てのチェックをリセットしますか？')) return;
+  checkedItems = {};
+  localStorage.removeItem('emergencyChecked');
+  renderChecklist();
+}
+
+renderChecklist();
+</script>
+</body>
+</html>
