@@ -152,7 +152,7 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
   <p>地震・台風・水害に備えた防災グッズの準備状況をチェック</p>
 </header>
 
-<main>
+<main role="main">
   <!-- スコア表示 -->
   <section class="card">
     <h2>📊 防災準備スコア</h2>
@@ -167,8 +167,8 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
     </div>
     <div class="family-filter">
       <span style="font-size:0.85rem;color:#ffcc80;align-self:center;">家族構成：</span>
-      <button class="family-btn active" onclick="filterFamily(this,'all')">全員共通</button>
-      <button class="family-btn" onclick="filterFamily(this,'baby')">＋乳幼児</button>
+      <button class="family-btn active" onclick="filterFamily(this,'all')" aria-label="全員共通">全員共通</button>
+      <button class="family-btn" onclick="filterFamily(this,'baby')" aria-label="＋乳幼児">＋乳幼児</button>
       <button class="family-btn" onclick="filterFamily(this,'elderly')">＋高齢者</button>
       <button class="family-btn" onclick="filterFamily(this,'pet')">＋ペット</button>
       <button class="family-btn" onclick="filterFamily(this,'medical')">＋持病あり</button>
@@ -358,7 +358,7 @@ function renderChecklist() {
           const label = { critical:'必須', high:'重要', medium:'推奨' }[item.priority] || '';
           const isChecked = !!checkedItems[item.id];
           return `<div class="item-row">
-            <input type="checkbox" class="item-checkbox" id="cb-${item.id}" ${isChecked?'checked':''} onchange="toggle('${item.id}')">
+            <input type="checkbox" class="item-checkbox" id="cb-${item.id}" ${isChecked?'checked':''} onchange="toggle('${item.id}')" aria-label="入力フォーム">
             <label for="cb-${item.id}" class="item-label ${isChecked?'checked':''}">
               ${item.text}
               ${item.note ? `<div class="item-note">💡 ${item.note}</div>` : ''}
