@@ -10,7 +10,8 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#ff9800">
-  <meta name="description" content="防災グッズの準備状況をチェックリストで確認。家族構成別の必要アイテムを自動提案。登録不要・完全無料でご利用いただけます。ブラウザから無料で使えます。">
+  <meta name="description" content="防災グッズの準備状況をチェックリストで確認。家族構成別の必要アイテムを自動提案">
+<meta name="author" content="AppADayCreator">
   <link rel="canonical" href="https://appadaycreator.com/emergency-bag-checker/">
   <meta property="og:title" content="防災チェックリスト【無料】非常持ち出し袋の準備状況を診断">
   <meta property="og:description" content="地震・台風に備えた防災グッズの準備状況をチェック。家族構成に合わせたカスタマイズリストに対応。">
@@ -21,57 +22,70 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TXQGZRF9');</script>
+  <!-- Consent Mode v2 -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});(function(){try{var k='cookie-consent-v2',o='cookie-consent';var c=localStorage.getItem(k);if(!c&&localStorage.getItem(o)==='1')c='granted';if(c){var s=c==='granted'?'granted':'denied';gtag('consent','update',{'analytics_storage':s,'ad_storage':s,'ad_user_data':s,'ad_personalization':s});}}catch(e){}})();</script>
+<!-- End Consent Mode v2 -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TXQGZRF9');</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDPNYD2875"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDPNYD2875',{send_page_view:false});</script>
   <!-- Microsoft Clarity -->
   <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","s3t9vl8h3v");</script>
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8427583028015858" crossorigin="anonymous"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Noto Sans JP', 'Inter', sans-serif; background: linear-gradient(135deg, #1a0d00 0%, #2d1a00 50%, #1a1000 100%); min-height: 100vh; color: #fff8e1; }
-    header { background: rgba(255,255,255,0.05);padding: 1rem 1.5rem; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    body { font-family: 'Noto Sans JP', 'Inter', sans-serif; background: #f8fafc; min-height: 100vh; color: #1e293b; }
+    header { background: linear-gradient(135deg, #e65100 0%, #ff9800 100%); padding: 1rem 1.5rem; text-align: center; border-bottom: 1px solid rgba(0,0,0,0.1); }
     header h1 { font-size: 1.6rem; color: #fff; font-weight: 700; }
-    header p { font-size: 0.9rem; color: #ffcc80; margin-top: 0.3rem; }
+    header p { font-size: 0.9rem; color: #fff3e0; margin-top: 0.3rem; }
     main { max-width: 900px; margin: 0 auto; padding: 1.5rem; }
-    .card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; }
-    .card h2 { font-size: 1.15rem; color: #fff; margin-bottom: 1rem; font-weight: 700; }
-    .score-display { text-align: center; padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 1rem; }
-    .score-num { font-size: 4rem; font-weight: 700; color: #ffd740; line-height: 1; }
-    .score-label { font-size: 1rem; color: #ffcc80; margin-top: 0.3rem; }
+    .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .card h2 { font-size: 1.15rem; color: #1e293b; margin-bottom: 1rem; font-weight: 700; }
+    .score-display { text-align: center; padding: 1.5rem; background: #f8fafc; border-radius: 16px; margin-bottom: 1rem; border: 1px solid #e2e8f0; }
+    .score-num { font-size: 4rem; font-weight: 700; color: #e65100; line-height: 1; }
+    .score-label { font-size: 1rem; color: #64748b; margin-top: 0.3rem; }
     .score-bar { margin-top: 0.8rem; }
-    .score-bar-bg { background: rgba(255,255,255,0.1); border-radius: 10px; height: 16px; overflow: hidden; }
-    .score-bar-fill { height: 100%; border-radius: 10px; transition: width 0.8s; }
+    .score-bar-bg { background: #e2e8f0; border-radius: 10px; height: 16px; overflow: hidden; }
+    .score-bar-fill { height: 100%; border-radius: 10px; transition: width 0.8s; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 0.8rem; }
     .score-bar-fill.low { background: linear-gradient(90deg, #c62828, #e53935); }
     .score-bar-fill.mid { background: linear-gradient(90deg, #e65100, #ff9800); }
     .score-bar-fill.high { background: linear-gradient(90deg, #2e7d32, #66bb6a); }
     .score-bar-fill.max { background: linear-gradient(90deg, #1565c0, #42a5f5); }
     .category-section { margin-bottom: 1.5rem; }
-    .cat-header { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); border-radius: 10px; padding: 0.7rem 1rem; margin-bottom: 0.5rem; cursor: pointer; }
-    .cat-title { font-size: 0.95rem; font-weight: 700; color: #fff; }
-    .cat-progress { font-size: 0.82rem; color: #ffcc80; }
+    .cat-header { display: flex; flex-direction: column; background: #f8fafc; border-radius: 10px; padding: 0.7rem 1rem; margin-bottom: 0.5rem; cursor: pointer; border: 1px solid #e2e8f0; }
+    .cat-header-row { display: flex; justify-content: space-between; align-items: center; }
+    .cat-title { font-size: 0.95rem; font-weight: 700; color: #1e293b; }
+    .cat-progress { font-size: 0.82rem; color: #64748b; }
+    .cat-mini-bar-bg { height: 4px; background: #e2e8f0; border-radius: 4px; margin-top: 0.5rem; overflow: hidden; }
+    .cat-mini-bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s; }
     .item-list { display: flex; flex-direction: column; gap: 0.4rem; padding: 0.2rem 0; }
-    .item-row { display: flex; align-items: center; gap: 0.7rem; padding: 0.5rem 0.8rem; background: rgba(255,255,255,0.03); border-radius: 8px; transition: background 0.2s; }
-    .item-row:hover { background: rgba(255,255,255,0.06); }
-    .item-checkbox { width: 20px; height: 20px; accent-color: #ff9800; cursor: pointer; flex-shrink: 0; }
-    .item-label { flex: 1; font-size: 0.9rem; color: #ccc; cursor: pointer; }
-    .item-label.checked { color: #aaa; text-decoration: line-through; }
+    .item-row { display: flex; align-items: center; gap: 0.7rem; padding: 0.5rem 0.8rem; background: #f8fafc; border-radius: 8px; transition: background 0.2s; }
+    .item-row:hover { background: #f1f5f9; }
+    .item-checkbox { width: 20px; height: 20px; accent-color: #e65100; cursor: pointer; flex-shrink: 0; }
+    .item-label { flex: 1; font-size: 0.9rem; color: #374151; cursor: pointer; }
+    .item-label.checked { color: #9ca3af; text-decoration: line-through; }
     .item-priority { font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 10px; font-weight: 600; flex-shrink: 0; }
-    .p-critical { background: rgba(198,40,40,0.3); color: #ef9a9a; border: 1px solid rgba(198,40,40,0.4); }
-    .p-high { background: rgba(230,81,0,0.3); color: #ffe0b2; border: 1px solid rgba(230,81,0,0.4); }
-    .p-medium { background: rgba(245,127,23,0.3); color: #fff9c4; border: 1px solid rgba(245,127,23,0.4); }
-    .item-note { font-size: 0.75rem; color: #888; margin-top: 0.1rem; }
+    .p-critical { background: #fee2e2; color: #c62828; border: 1px solid #fca5a5; }
+    .p-high { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
+    .p-medium { background: #fefce8; color: #a16207; border: 1px solid #fde68a; }
+    .item-note { font-size: 0.75rem; color: #6b7280; margin-top: 0.1rem; }
     .family-filter { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
-    .family-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #ccc; font-size: 0.82rem; padding: 0.35rem 0.8rem; border-radius: 20px; cursor: pointer; font-family: inherit; transition: all 0.2s; }
-    .family-btn.active { background: rgba(255,152,0,0.3); border-color: #ffcc80; color: #fff; }
+    .family-btn { background: #f1f5f9; border: 1px solid #d1d5db; color: #374151; font-size: 0.82rem; padding: 0.35rem 0.8rem; border-radius: 20px; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+    .family-btn.active { background: #fff7ed; border-color: #f97316; color: #c2410c; font-weight: 700; }
     .btn { display: block; width: 100%; padding: 0.85rem; background: linear-gradient(90deg, #e65100, #ff9800); color: #fff; font-size: 1rem; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; margin-top: 1rem; font-family: inherit; }
     .btn:hover { opacity: 0.9; }
+    .btn:focus-visible, input:focus-visible, button:focus-visible { outline: 3px solid #e65100; outline-offset: 2px; }
+    .item-checkbox:focus-visible { outline: 3px solid #e65100; outline-offset: 1px; }
     .tips-list { list-style: none; }
-    .tips-list li { padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.9rem; color: #ccc; }
+    .tips-list li { padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem; color: #374151; }
     .tips-list li::before { content: "🚨 "; }
-    footer { background: rgba(0,0,0,0.3); text-align: center; padding: 2rem 1rem; margin-top: 2rem; color: #888; font-size: 0.85rem; }
-    footer a { color: #ffcc80; text-decoration: none; }
+    footer { background: #1e293b; text-align: center; padding: 2rem 1rem; margin-top: 2rem; color: #94a3b8; font-size: 0.85rem; }
+    footer a { color: #fbbf24; text-decoration: none; }
     footer .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
+    @keyframes celebrate-fade { 0% { opacity:0; transform:scale(0.8); } 60% { opacity:1; transform:scale(1.05); } 100% { opacity:1; transform:scale(1); } }
+    .celebrate-banner { animation: celebrate-fade 0.6s ease-out forwards; background: linear-gradient(135deg,#065f46,#059669); border-radius:12px; padding:1rem; margin-top:1rem; text-align:center; color:#fff; font-weight:700; font-size:1rem; line-height:1.6; }
   
 /* Phase 8: Mobile Optimization */
 input, select, textarea { font-size: 16px !important; }
@@ -96,11 +110,34 @@ button, .btn, .btn-primary, .option-btn, [role="button"] { min-height: 48px; min
 
 /* AdSense unfilled: collapse empty ad slots */
 ins.adsbygoogle[data-ad-status="unfilled"]{display:none!important;margin:0!important;height:0!important}
-</style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"非常持ち出し袋チェッカーは無料で使えますか？","acceptedAnswer":{"@type":"Answer","text":"はい、完全無料でご利用いただけます。登録・ログイン不要ですぐに使えます。"}},{"@type":"Question","name":"入力したデータはどこに保存されますか？","acceptedAnswer":{"@type":"Answer","text":"入力データはお使いのデバイス内にのみ保存されます。外部サーバーへの送信は行いません。"}},{"@type":"Question","name":"非常持ち出し袋チェッカーの計算・診断結果はどのくらい正確ですか？","acceptedAnswer":{"@type":"Answer","text":"本ツールの結果はあくまで参考情報です。重要な判断の際は専門家にご相談ください。"}},{"@type":"Question","name":"どのような人が使っていますか？","acceptedAnswer":{"@type":"Answer","text":"初心者から専門家まで、多くの方にご利用いただいています。特に決断が必要な場面で活躍します。"}},{"@type":"Question","name":"結果をシェアできますか？","acceptedAnswer":{"@type":"Answer","text":"はい、診断結果はスクリーンショットやURLで友人・家族とシェアできます。"}},{"@type":"Question","name":"有料プランはありますか？","acceptedAnswer":{"@type":"Answer","text":"いいえ、すべての機能を完全無料でご利用いただけます。"}}]}</script>
-<script type="application/ld+json">
 
-</script>
+/* M4: Chart.jsStyles & M8: Modal */
+.chart-container { position: relative; height: 250px; margin: 1.5rem 0; padding: 1rem; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; }
+.charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+.chart-wrapper { background: #fff; padding: 1rem; border-radius: 12px; border: 1px solid #e2e8f0; }
+.chart-wrapper h3 { font-size: 0.9rem; font-weight: 700; color: #1e293b; margin-bottom: 0.5rem; }
+
+/* M8: Modal Dialog */
+#detailModal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
+#detailModal.active { display: flex; align-items: center; justify-content: center; }
+.modal-content { background: #fff; border-radius: 16px; padding: 2rem; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.modal-header h2 { font-size: 1.3rem; color: #1e293b; margin: 0; }
+.modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #64748b; }
+.modal-close:hover { color: #1e293b; }
+.modal-detail-section { margin-bottom: 1.5rem; }
+.modal-detail-section h3 { font-size: 0.95rem; font-weight: 700; color: #374151; margin-bottom: 0.5rem; }
+.modal-detail-section p { font-size: 0.9rem; color: #4b5563; line-height: 1.6; margin: 0 0 0.5rem; }
+.modal-links { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 0.8rem; }
+.modal-link-btn { display: inline-block; padding: 0.5rem 1rem; background: #e65100; color: #fff; border-radius: 8px; font-size: 0.85rem; text-decoration: none; font-weight: 600; border: none; cursor: pointer; transition: background 0.2s; }
+.modal-link-btn:hover { background: #ff9800; }
+
+/* Item info icon */
+.item-info-icon { display: inline-block; width: 20px; height: 20px; line-height: 20px; text-align: center; background: #e65100; color: #fff; border-radius: 50%; font-size: 0.75rem; font-weight: 700; cursor: pointer; margin-left: 0.4rem; flex-shrink: 0; transition: background 0.2s; }
+.item-info-icon:hover { background: #ff9800; }
+</style>
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -108,7 +145,11 @@ ins.adsbygoogle[data-ad-status="unfilled"]{display:none!important;margin:0!impor
   "name": "appadaycreator",
   "url": "https://appadaycreator.com",
   "logo": "https://appadaycreator.com/logo.png",
-  "description": "無料Webサービス・診断ツール 180種類以上を運営"
+  "description": "無料Webサービス・診断ツール 180種類以上を運営",
+  "sameAs": [
+    "https://twitter.com/appadaycreate",
+    "https://appadaycreator.com"
+  ]
 }
 </script>
 <meta property="og:type" content="website">
@@ -161,6 +202,7 @@ ins.adsbygoogle[data-ad-status="unfilled"]{display:none!important;margin:0!impor
 .py-1{padding-top:4px;padding-bottom:4px;}.hover\:underline:hover{text-decoration:underline;}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ホーム","item":"https://appadaycreator.com/"},{"@type":"ListItem","position":2,"name":"診断/アドバイス","item":"https://appadaycreator.com/category/advisor/"},{"@type":"ListItem","position":3,"name":"防災チェックリスト非常持ち出し袋の準備状況を診断","item":"https://appadaycreator.com/emergency-bag-checker/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"「非常持ち出し袋チェッカー」は無料で使えますか？","acceptedAnswer":{"@type":"Answer","text":"はい、完全無料・登録不要です。"}},{"@type":"Question","name":"スマートフォンでも使えますか？","acceptedAnswer":{"@type":"Answer","text":"はい、モバイル対応済みです。"}}]}</script>
 </head>
 <body><a href="#main" class="sr-only">本文へスキップ</a>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TXQGZRF9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -169,6 +211,13 @@ ins.adsbygoogle[data-ad-status="unfilled"]{display:none!important;margin:0!impor
   <h1>🎒 非常持ち出し袋チェッカー</h1>
   <p>地震・台風・水害に備えた防災グッズの準備状況をチェック</p>
 </header>
+<div style="background:#4338ca;padding:5px 12px;text-align:right;font-size:.78rem"><a href="/blog/" style="color:#c7d2fe;text-decoration:none;font-weight:600">📖 コラム</a>&nbsp;｜&nbsp;<a href="/" style="color:#c7d2fe;text-decoration:none">ホーム</a></div>
+<!-- r21-breadcrumb -->
+<nav aria-label="パンくずリスト" style="background:#f8fafc;border-bottom:1px solid #e2e8f0;padding:5px 16px;font-size:.78rem;color:#6b7280;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">
+  <a href="/" style="color:#4f46e5;text-decoration:none">ホーム</a>
+  <span style="margin:0 .35rem;color:#9ca3af">›</span>
+  <span style="color:#374151">防災チェックリスト【無料】非常持ち出し袋の準備状況を診断</span>
+</nav>
 
 <main id="main" role="main">
   <!-- スコア表示 -->
@@ -183,8 +232,25 @@ ins.adsbygoogle[data-ad-status="unfilled"]{display:none!important;margin:0!impor
         </div>
       </div>
     </div>
+    <!-- M4: Charts for visualization -->
+    <div class="charts-grid" id="chartsContainer" style="margin-bottom: 1.5rem; display: none;">
+      <div class="chart-wrapper">
+        <h3>📊 カテゴリ別完成度</h3>
+        <div class="chart-container" style="position: relative; height: 280px;">
+          <canvas id="categoryChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:1rem;">
+      <input type="text" id="searchInput" placeholder="🔍 アイテムを検索（例：水、薬、懐中電灯）"
+             onkeyup="filterSearch(this.value)"
+             style="width:100%;padding:0.6rem 0.8rem;background:#f1f5f9;border:1px solid #d1d5db;border-radius:8px;color:#374151;font-family:inherit;font-size:0.9rem;"
+             aria-label="チェックリスト項目の検索">
+      <button onclick="document.getElementById('searchInput').value='';filterSearch('');" style="margin-top:0.4rem;font-size:0.8rem;padding:0.4rem 0.8rem;background:#f1f5f9;border:1px solid #d1d5db;color:#374151;border-radius:6px;cursor:pointer;">検索クリア</button>
+    </div>
     <div class="family-filter">
-      <span style="font-size:0.85rem;color:#ffcc80;align-self:center;">家族構成：</span>
+      <span style="font-size:0.85rem;color:#64748b;align-self:center;">家族構成：</span>
       <button class="family-btn active" onclick="filterFamily(this,'all')" aria-label="全員共通">全員共通</button>
       <button class="family-btn" onclick="filterFamily(this,'baby')" aria-label="＋乳幼児">＋乳幼児</button>
       <button class="family-btn" onclick="filterFamily(this,'elderly')">＋高齢者</button>
@@ -192,7 +258,92 @@ ins.adsbygoogle[data-ad-status="unfilled"]{display:none!important;margin:0!impor
       <button class="family-btn" onclick="filterFamily(this,'medical')">＋持病あり</button>
     </div>
     <button class="btn" onclick="resetAll()">チェックをすべてリセット</button>
+    <button class="btn" onclick="exportChecklist()" style="background:linear-gradient(90deg,#1e7e34,#2d9d4a);margin-top:0.7rem;">📥 チェックリストをエクスポート</button>
   </section>
+
+  <!-- M7: 比較・シミュレーション機能 -->
+  <section class="card">
+    <h2>🔄 複数パターンの比較・シミュレーション</h2>
+    <p style="font-size:0.9rem;color:#64748b;margin-bottom:1rem;">異なる家族構成での必要アイテム数やスコアを比較。「もし〜だったら」というシナリオをシミュレーションできます。</p>
+
+    <div style="margin-bottom:1.5rem;">
+      <label style="font-size:0.9rem;font-weight:600;color:#374151;display:block;margin-bottom:0.5rem;">比較パターン選択：</label>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.5rem;margin-bottom:1rem;">
+        <button class="family-btn active" onclick="selectComparePattern('single')" style="background:#fff7ed;border-color:#f97316;color:#c2410c;font-weight:700;">1️⃣ 一人暮らし</button>
+        <button class="family-btn" onclick="selectComparePattern('family3')" style="font-weight:600;">👨‍👩‍👧 家族3人</button>
+        <button class="family-btn" onclick="selectComparePattern('family_baby')" style="font-weight:600;">👶 乳幼児+両親</button>
+        <button class="family-btn" onclick="selectComparePattern('family_elderly')" style="font-weight:600;">👴 高齢者+両親</button>
+      </div>
+    </div>
+
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1rem;margin-bottom:1rem;">
+      <h3 style="font-size:0.95rem;font-weight:700;color:#1e293b;margin-bottom:0.8rem;text-align:center;">📊 パターン別比較表</h3>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+          <thead>
+            <tr style="background:#fff7ed;border:1px solid #fed7aa;">
+              <th style="padding:0.6rem 0.8rem;text-align:left;border:1px solid #fed7aa;font-weight:700;color:#c2410c;">パターン</th>
+              <th style="padding:0.6rem 0.8rem;text-align:center;border:1px solid #fed7aa;font-weight:700;color:#c2410c;">必須アイテム</th>
+              <th style="padding:0.6rem 0.8rem;text-align:center;border:1px solid #fed7aa;font-weight:700;color:#c2410c;">全アイテム</th>
+              <th style="padding:0.6rem 0.8rem;text-align:center;border:1px solid #fed7aa;font-weight:700;color:#c2410c;">目安スコア</th>
+            </tr>
+          </thead>
+          <tbody id="compareTableBody">
+            <tr style="background:#fff;border:1px solid #e2e8f0;">
+              <td style="padding:0.6rem 0.8rem;border:1px solid #e2e8f0;color:#374151;font-weight:600;">一人暮らし</td>
+              <td style="padding:0.6rem 0.8rem;border:1px solid #e2e8f0;text-align:center;color:#1e293b;">-</td>
+              <td style="padding:0.6rem 0.8rem;border:1px solid #e2e8f0;text-align:center;color:#1e293b;">-</td>
+              <td style="padding:0.6rem 0.8rem;border:1px solid #e2e8f0;text-align:center;color:#1e293b;">計算中...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="background:#f0f7ff;border:1px solid #bfdbfe;border-radius:10px;padding:1rem;margin-bottom:1rem;">
+      <h3 style="font-size:0.9rem;font-weight:700;color:#1e40af;margin:0 0 0.8rem;">💡 シミュレーション例</h3>
+      <div style="font-size:0.85rem;color:#374151;line-height:1.8;">
+        <p style="margin:0 0 0.5rem;"><strong>「赤ちゃんが生まれたら？」</strong><br>おむつ・粉ミルク・離乳食など、新たに<span style="color:#c2410c;font-weight:700;">+15~20アイテム</span>必要に</p>
+        <p style="margin:0 0 0.5rem;"><strong>「両親と一緒に住むことになったら？」</strong><br>高齢者向け食事・常用薬など、<span style="color:#c2410c;font-weight:700;">+12~18アイテム</span>追加が必要</p>
+        <p style="margin:0;"><strong>「一人暮らしを解く（複数人家族へ）」</strong><br>1人分の基本アイテムから<span style="color:#c2410c;font-weight:700;">最大3倍以上</span>のストック量へ</p>
+      </div>
+    </div>
+
+    <button class="btn" onclick="openSimulationModal()" style="background:linear-gradient(90deg,#7c3aed,#9333ea);margin-top:0.5rem;">🎯 カスタムシミュレーション設定</button>
+  </section>
+
+  <!-- カスタムシミュレーションモーダル -->
+  <div id="simulationModal" style="display:none;position:fixed;z-index:10001;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,0.5);">
+    <div class="modal-content" style="max-width:550px;">
+      <div class="modal-header">
+        <h2>カスタムシミュレーション</h2>
+        <button class="modal-close" onclick="closeSimulationModal()">✕</button>
+      </div>
+      <div id="simulationModalBody" style="font-size:0.9rem;">
+        <p style="color:#374151;margin-bottom:1rem;">家族構成を選択して、必要なアイテム数をシミュレーション：</p>
+        <div style="margin-bottom:1.5rem;">
+          <label style="display:flex;gap:0.5rem;align-items:center;padding:0.5rem;cursor:pointer;">
+            <input type="checkbox" id="sim-baby" onchange="updateSimulation()"> 乳幼児がいる
+          </label>
+          <label style="display:flex;gap:0.5rem;align-items:center;padding:0.5rem;cursor:pointer;">
+            <input type="checkbox" id="sim-elderly" onchange="updateSimulation()"> 高齢者がいる
+          </label>
+          <label style="display:flex;gap:0.5rem;align-items:center;padding:0.5rem;cursor:pointer;">
+            <input type="checkbox" id="sim-pet" onchange="updateSimulation()"> ペットがいる
+          </label>
+          <label style="display:flex;gap:0.5rem;align-items:center;padding:0.5rem;cursor:pointer;">
+            <input type="checkbox" id="sim-medical" onchange="updateSimulation()"> 持病・常用薬がある
+          </label>
+        </div>
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:1rem;margin-bottom:1rem;">
+          <h4 style="font-size:0.85rem;font-weight:700;color:#1e293b;margin:0 0 0.8rem;">📌 シミュレーション結果</h4>
+          <p style="margin:0.3rem 0;"><strong>アイテム数:</strong> <span id="simItemCount" style="color:#e65100;font-weight:700;">計算中...</span></p>
+          <p style="margin:0.3rem 0;"><strong>重点購入:</strong> <span id="simRecommend" style="font-size:0.8rem;color:#374151;">計算中...</span></p>
+        </div>
+        <button class="btn" onclick="closeSimulationModal()" style="background:linear-gradient(90deg,#1e7e34,#2d9d4a);">完了</button>
+      </div>
+    </div>
+  </div>
 
   <!-- チェックリスト -->
   <div id="checklistContainer"></div>
@@ -226,100 +377,241 @@ ins.adsbygoogle[data-ad-status="unfilled"]{display:none!important;margin:0!impor
       </div>
     </div>
   </section>
+
+<section aria-labelledby="faq-h" class="bg-white rounded-2xl shadow-md p-4 mb-4" style="max-width:740px;margin-left:auto;margin-right:auto">
+  
+<div style="background:#f0f7ff;border:1px solid #bfdbfe;border-radius:12px;padding:1.5rem 1.75rem;margin:2rem 0" id="tool-desc-box">
+  <h2 style="font-size:1.05rem;font-weight:800;color:#1e40af;margin:0 0 1rem">📋 このツールの詳細</h2>
+  <p style="color:#374151;margin:0 0 .75rem;line-height:1.8">「🎒 非常持ち出し袋チェッカー」は、防災グッズの準備状況をチェックリストで確認。家族構成別の必要アイテムを自動提案。</p>
+</div>
+<div style="background:#f0f7ff;border:2px solid #bfdbfe;border-radius:12px;padding:1.5rem 1.75rem;margin:2rem 0">
+  <h2 style="font-size:1.1rem;font-weight:800;color:#1e3a5f;margin:0 0 1rem;padding-bottom:.75rem;border-bottom:2px solid #bfdbfe">非常用持ち出し袋チェッカー — 避難バッグの中身を診断</h2>
+  <h3 style="font-size:1rem;font-weight:700;color:#1e3a5f;margin:1.25rem 0 .5rem">このツールでできること</h3>
+  <p style="font-size:.9375rem;color:#374151;line-height:1.8;margin:0 0 1rem">非常用持ち出し袋の中身をチェックリストで確認し、不足しているアイテムと優先順位を表示します。家族人数・赤ちゃん・介護が必要な方の有無に応じたカスタマイズ提案と、アイテムの選び方ガイドも収録しています。</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#1e3a5f;margin:1.25rem 0 .5rem">非常用持ち出し袋に必ず入れるべき10アイテム</h3>
+  <p style="font-size:.9375rem;color:#374151;line-height:1.8;margin:0 0 1rem">内閣府の推奨リストでは①飲料水（500mL×2本）②非常食（3日分）③懐中電灯④乾電池⑤モバイルバッテリー⑥救急セット⑦常備薬⑧雨具⑨現金（小銭含む）⑩マスク・衛生用品が最重要とされています。合計重量は10kg以内に収めることが推奨です。</p>
+  <h3 style="font-size:1rem;font-weight:700;color:#1e3a5f;margin:1.25rem 0 .5rem">避難場所と避難経路の事前確認</h3>
+  <p style="font-size:.9375rem;color:#374151;line-height:1.8;margin:0">自治体が作成するハザードマップで最寄りの避難場所（一次・二次）と避難経路を事前に確認しておくことが重要です。避難場所によっては「ペット同伴不可」「車いす対応」など条件があるため、家族の状況に合った避難場所を複数候補として把握しておきましょう。</p>
+</div>
+<!-- r16-related-tools -->
+<div style="background:#f8faff;border:1px solid #dbeafe;border-radius:12px;padding:1.25rem 1.5rem;margin:1.5rem 0">
+  <h3 style="font-size:.9375rem;font-weight:800;color:#1e3a5f;margin:0 0 .875rem">🔗 このツールと一緒によく使われるツール</h3>
+  <div style="display:grid;gap:.5rem">
+    <a href="/disaster-preparedness-checker/" style="display:flex;align-items:center;gap:8px;background:#fff;border-radius:8px;padding:.625rem .875rem;border:1px solid #bfdbfe;text-decoration:none;color:#1f2937;font-size:.875rem;font-weight:600">🔗 防災備え確認<span style="color:#6b7280;font-size:.78rem;font-weight:400">— 総合的な防災診断</span></a>
+    <a href="/food-waste-calculator/" style="display:flex;align-items:center;gap:8px;background:#fff;border-radius:8px;padding:.625rem .875rem;border:1px solid #bfdbfe;text-decoration:none;color:#1f2937;font-size:.875rem;font-weight:600">🔗 食品管理<span style="color:#6b7280;font-size:.78rem;font-weight:400">— 備蓄食材の管理</span></a>
+    <a href="/electric-bill-simulator/" style="display:flex;align-items:center;gap:8px;background:#fff;border-radius:8px;padding:.625rem .875rem;border:1px solid #bfdbfe;text-decoration:none;color:#1f2937;font-size:.875rem;font-weight:600">🔗 電気代計算<span style="color:#6b7280;font-size:.78rem;font-weight:400">— 太陽光・蓄電池の検討</span></a>
+  </div>
+</div>
+<!-- r22-editorial -->
+<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:.75rem;padding:1.5rem;margin:1.5rem 0">
+  <h2 style="font-size:1.05rem;font-weight:800;color:#14532d;margin:0 0 1rem;border-left:4px solid #16a34a;padding-left:.75rem">住まい・家事の実態データ（総務省・国土交通省）</h2>
+  <p style="font-size:.88rem;color:#4b5563;margin:0 0 .75rem">総務省「住宅土地統計調査」・国土交通省データをもとに、住まいにかかる費用と維持管理のポイントを整理しました。</p>
+  <table style="width:100%;border-collapse:collapse;font-size:.83rem">
+    <thead>
+      <tr style="background:#bbf7d0">
+        <th style="padding:.5rem .75rem;text-align:left;border:1px solid #bbf7d0;color:#14532d">項目</th>
+        <th style="padding:.5rem .75rem;text-align:left;border:1px solid #bbf7d0;color:#14532d">データ</th>
+        <th style="padding:.5rem .75rem;text-align:left;border:1px solid #bbf7d0;color:#14532d">出典</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:#f0fdf4">
+        <td style="padding:.5rem .75rem;border:1px solid #bbf7d0;font-weight:600;color:#14532d">持ち家世帯の住宅ローン平均残高</td>
+        <td style="padding:.5rem .75rem;border:1px solid #bbf7d0"><strong>約1,600万円（2023年度・住宅金融支援機構調査参考）</strong></td>
+        <td style="padding:.5rem .75rem;border:1px solid #bbf7d0;font-size:.78rem;color:#6b7280">住宅金融支援機構「フラット35利用者調査」</td>
+      </tr>
+      <tr style="">
+        <td style="padding:.5rem .75rem;border:1px solid #bbf7d0;font-weight:600;color:#14532d">家事にかかる時間（有職女性・1日平均）</td>
+        <td style="padding:.5rem .75rem;border:1px solid #bbf7d0"><strong>約2.5時間（2021年社会生活基本調査）</strong></td>
+        <td style="padding:.5rem .75rem;border:1px solid #bbf7d0;font-size:.78rem;color:#6b7280">総務省「社会生活基本調査」2021年</td>
+      </tr>
+      <tr style="background:#f0fdf4">
+        <td style="padding:.5rem .75rem;border:1px solid #bbf7d0;font-weight:600;color:#14532d">光熱費の月平均（二人以上世帯）</td>
+        <td style="padding:.5rem .75rem;border:1px solid #bbf7d0"><strong>電気代：約12,000〜15,000円 / ガス：約5,000〜7,000円</strong></td>
+        <td style="padding:.5rem .75rem;border:1px solid #bbf7d0;font-size:.78rem;color:#6b7280">総務省「家計調査」2023年（参考値）</td>
+      </tr>
+      <tr style="">
+        <td style="padding:.5rem .75rem;border:1px solid #bbf7d0;font-weight:600;color:#14532d">住宅の平均築年数（持ち家）</td>
+        <td style="padding:.5rem .75rem;border:1px solid #bbf7d0"><strong>約32年（2018年時点）</strong></td>
+        <td style="padding:.5rem .75rem;border:1px solid #bbf7d0;font-size:.78rem;color:#6b7280">総務省「住宅土地統計調査」2018年</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- r20-tool-links -->
+<div id="tool-disclaimer" style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1.25rem 1.5rem;margin:1.5rem 0;font-size:.875rem">
+  <p style="font-weight:700;color:#374151;margin:0 0 .5rem">⚠️ 計算結果の活用にあたって</p>
+  <ul style="margin:0;padding-left:1.25rem;color:#4b5563;line-height:1.9"><li><a href="https://www.caa.go.jp/" target="_blank" rel="noopener noreferrer" style="color:#4f46e5;font-size:.85rem">消費者庁「くらしの安心ガイド」</a></li></ul>
+</div>
+<h2 id="faq-h" style="font-size:1.05rem;font-weight:700;margin-bottom:12px;border-left:4px solid #4f46e5;padding-left:10px;">よくある質問</h2>
+  <dl style="line-height:1.8;">
+    <dt style="font-weight:600;color:#1e293b;padding:8px 0 4px">Q. 防災袋（非常持ち出し袋）に入れるべき必需品は？</dt>
+    <dd style="font-size:.875rem;color:#475569;margin:0 0 12px;padding-left:12px;line-height:1.8">防災袋の必需品として「飲料水（1人1日3L×3日分・ペットボトル）」「食料（レトルト・カンパン・アルファ米・3日〜1週間分）」「救急セット（包帯・消毒薬・常備薬）」「懐中電灯・予備電池またはLEDランタン」「携帯ラジオ（手回し充電または電池式）」「モバイルバッテリー」「現金（小銭含む・停電でカードが使えない）」「身分証のコピー」「雨具・防寒具・替えの下着」「マスク・消毒液」があります。袋は定期的（年1〜2回）に中身の確認・更新をし、賞味期限切れの食品や電池の劣化を防ぎましょう。</dd>
+    <dt style="font-weight:600;color:#1e293b;padding:8px 0 4px">Q. 家族構成別に防災袋の中身は変える必要がありますか？</dt>
+    <dd style="font-size:.875rem;color:#475569;margin:0 0 12px;padding-left:12px;line-height:1.8">家族構成によって防災袋の中身は変わります。「乳幼児がいる場合」：粉ミルク・哺乳瓶・離乳食・おむつ・ウェットティッシュ・着替えを多めに。「高齢者がいる場合」：常備薬（7日分以上）・お薬手帳のコピー・補聴器電池・眼鏡・介護用品。「ペットがいる場合」：ペットフード・ケージ・ワクチン証明書。「要介護・障害者がいる場合」：福祉避難所の場所の事前確認・医療機器の電源確保手段。ご家族の状況に合わせたリストを作ることが重要です。</dd>
+    <dt style="font-weight:600;color:#1e293b;padding:8px 0 4px">Q. 防災袋はいつ・どこに置いておくべきですか？</dt>
+    <dd style="font-size:.875rem;color:#475569;margin:0 0 12px;padding-left:12px;line-height:1.8">防災袋の置き場所として「玄関近く・すぐに持ち出せる場所」が基本です。2階建て以上の場合は「各階に1セット準備する」と安心です。寝室の近くに懐中電灯・スリッパ・笛を置いておくと夜間の地震対応に役立ちます。「自宅用（水・食料の備蓄）」と「持ち出し用（移動できるリュック）」を分けて準備することも推奨されています。また職場・学校にもミニ防災セットを用意しておくと通勤・通学中の災害時に対応しやすくなります。</dd>
+  </dl>
+</section>
 </main>
 
-<section style="background:#f8fafc;border-top:1px solid #e2e8f0;padding:24px 16px;margin-top:16px;">
+<div class="max-w-2xl mx-auto px-4 mb-4">
+<section style="background:#f8fafc;border-top:1px solid #e2e8f0;padding:24px 16px;margin-top:16px;max-width:720px;margin-left:auto;margin-right:auto;">
   <h2 style="font-size:16px;font-weight:700;color:#1e293b;margin:0 0 16px;text-align:center;">❓ よくある質問（FAQ）</h2>
   <div style="max-width:680px;margin:0 auto;">
     <details style="border:1px solid #e2e8f0;border-radius:8px;margin-bottom:8px;overflow:hidden;">
-      <summary style="padding:12px 16px;cursor:pointer;font-size:14px;font-weight:600;color:#334155;background:#fff;list-style:none;display:flex;justify-content:space-between;align-items:center;">Q. このチェック結果は医療診断の代わりになりますか？ <span>▼</span></summary>
-      <p style="padding:12px 16px;font-size:13px;color:#475569;margin:0;background:#f8fafc;">なりません。本ツールはあくまで参考情報の提供を目的としています。症状が続く場合は必ず医療機関を受診してください。</p>
+      <summary style="padding:12px 16px;cursor:pointer;font-size:14px;font-weight:600;color:#334155;background:#fff;list-style:none;display:flex;justify-content:space-between;align-items:center;">Q. 防災準備スコアはどんな基準で算出されますか？ <span>▼</span></summary>
+      <p style="padding:12px 16px;font-size:13px;color:#475569;margin:0;background:#f8fafc;">水・食料・モバイルバッテリー・救急用品など、内閣府や自治体が推奨する非常持ち出し品の項目チェック数からスコア化しています。家族構成に応じた不足品も目安として提示します。</p>
     </details>
     <details style="border:1px solid #e2e8f0;border-radius:8px;margin-bottom:8px;overflow:hidden;">
-      <summary style="padding:12px 16px;cursor:pointer;font-size:14px;font-weight:600;color:#334155;background:#fff;list-style:none;display:flex;justify-content:space-between;align-items:center;">Q. プライバシーは守られますか？ <span>▼</span></summary>
-      <p style="padding:12px 16px;font-size:13px;color:#475569;margin:0;background:#f8fafc;">入力された健康情報はサーバーに送信・保存されません。すべてお使いのブラウザ上で処理されます。</p>
+      <summary style="padding:12px 16px;cursor:pointer;font-size:14px;font-weight:600;color:#334155;background:#fff;list-style:none;display:flex;justify-content:space-between;align-items:center;">Q. 家族構成や備蓄状況のチェック内容は外部に残りますか？ <span>▼</span></summary>
+      <p style="padding:12px 16px;font-size:13px;color:#475569;margin:0;background:#f8fafc;">乳幼児・高齢者・ペットの有無や各アイテムのチェック状況はブラウザ内だけで集計され、サーバーへ送信されません。家庭の防災事情を気にせず入力できます。</p>
     </details>
+    
+    
     <details style="border:1px solid #e2e8f0;border-radius:8px;margin-bottom:8px;overflow:hidden;">
-      <summary style="padding:12px 16px;cursor:pointer;font-size:14px;font-weight:600;color:#334155;background:#fff;list-style:none;display:flex;justify-content:space-between;align-items:center;">Q. このサービスは無料で使えますか？ <span>▼</span></summary>
-      <p style="padding:12px 16px;font-size:13px;color:#475569;margin:0;background:#f8fafc;">はい、完全無料でご利用いただけます。登録・ログイン不要で、すぐにお使いいただけます。</p>
-    </details>
-    <details style="border:1px solid #e2e8f0;border-radius:8px;margin-bottom:8px;overflow:hidden;">
-      <summary style="padding:12px 16px;cursor:pointer;font-size:14px;font-weight:600;color:#334155;background:#fff;list-style:none;display:flex;justify-content:space-between;align-items:center;">Q. 入力したデータはどこに保存されますか？ <span>▼</span></summary>
-      <p style="padding:12px 16px;font-size:13px;color:#475569;margin:0;background:#f8fafc;">入力データはサーバーに送信されません。お使いのブラウザ上でのみ処理されます。</p>
-    </details>
-    <details style="border:1px solid #e2e8f0;border-radius:8px;margin-bottom:8px;overflow:hidden;">
-      <summary style="padding:12px 16px;cursor:pointer;font-size:14px;font-weight:600;color:#334155;background:#fff;list-style:none;display:flex;justify-content:space-between;align-items:center;">Q. 何度でも使えますか？ <span>▼</span></summary>
-      <p style="padding:12px 16px;font-size:13px;color:#475569;margin:0;background:#f8fafc;">はい、何度でも無料でご利用いただけます。条件を変えてお試しいただけます。</p>
+      <summary style="padding:12px 16px;cursor:pointer;font-size:14px;font-weight:600;color:#334155;background:#fff;list-style:none;display:flex;justify-content:space-between;align-items:center;">Q. 備蓄を買い足すたびにチェックし直せますか？ <span>▼</span></summary>
+      <p style="padding:12px 16px;font-size:13px;color:#475569;margin:0;background:#f8fafc;">はい。アイテムを買い足したり、子どもの成長やペットの追加で必要品が変わったりするたびに再チェックできます。最低3日分の備えが揃うまで定期的に見直すのがおすすめです。</p>
     </details>
   </div>
 </section>
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:16px 18px;margin:20px 0" id="related-blog">
+  <p style="font-weight:800;font-size:.9rem;color:#1e293b;margin:0 0 10px">📚 関連コラム</p>
+  <ul style="margin:0;padding-left:0;list-style:none"><li style="margin:0 0 6px"><a href="/blog/household-budget-guide/" style="color:#4f46e5;font-size:.88rem;text-decoration:none;">📖 家計管理の基本ガイド</a></li><li style="margin:0 0 6px"><a href="/blog/rogo-2000man-guide/" style="color:#4f46e5;font-size:.88rem;text-decoration:none;">📖 老後2,000万円問題の解決策</a></li></ul>
+</div>
+</div>
 
-<section style="background:#f0f9ff;border-top:1px solid #bae6fd;padding:16px;text-align:center;font-size:12px;color:#0369a1;">
+<div class="max-w-2xl mx-auto px-4"><section  style="background:#f0f9ff;border:1px solid #bae6fd;padding:16px;text-align:center;font-size:12px;color:#0369a1;border-radius:14px;margin-bottom:16px;">
   <p style="margin:0 0 4px;font-weight:600;">📧 お問い合わせ</p>
   <p style="margin:0;">ご意見・ご要望・不具合のご報告は <a href="mailto:appadaycreator@gmail.com" style="color:#0369a1;font-weight:bold;">appadaycreator@gmail.com</a> または <a href="contact.html" style="color:#0369a1;">お問い合わせフォーム</a> へ</p>
-</section>
+</section></div>
+
+<!-- M8: Detail Modal Dialog -->
+<div id="detailModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="modalTitle"></h2>
+      <button class="modal-close" onclick="closeDetailModal()" aria-label="モーダルを閉じる">✕</button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
 
 <script>
+function openDetailModal(itemId) {
+  const allItems = CHECKLIST.flatMap(c => c.items);
+  const item = allItems.find(i => i.id === itemId);
+  if (!item) return;
+
+  const modal = document.getElementById('detailModal');
+  document.getElementById('modalTitle').textContent = item.text;
+
+  let html = '';
+  if (item.detail) {
+    html += `<div class="modal-detail-section"><h3>📌 このアイテムが必要な理由</h3><p>${item.detail}</p></div>`;
+  }
+  if (item.examples) {
+    html += `<div class="modal-detail-section"><h3>💡 具体的な商品例</h3><p>${item.examples}</p></div>`;
+  }
+  if (item.price) {
+    html += `<div class="modal-detail-section"><h3>💰 相場</h3><p>${item.price}</p></div>`;
+  }
+  if (item.tip) {
+    html += `<div class="modal-detail-section"><h3>⭐ 選び方のコツ</h3><p>${item.tip}</p></div>`;
+  }
+
+  document.getElementById('modalBody').innerHTML = html;
+  modal.classList.add('active');
+}
+
+function closeDetailModal() {
+  document.getElementById('detailModal').classList.remove('active');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeDetailModal();
+    closeSimulationModal();
+  }
+});
+
+document.getElementById('detailModal').addEventListener('click', e => {
+  if (e.target.id === 'detailModal') closeDetailModal();
+});
+
 const CHECKLIST = [
   { cat: '💧 水・食料（最重要）', items: [
-    { id:'w1', text:'飲料水（1人1日3L × 3日分）', priority:'critical', family:['all'], note:'2Lペットボトルを家族分確保' },
-    { id:'w2', text:'非常食・乾パン・レトルト（3日分）', priority:'critical', family:['all'], note:'カロリーメイト・缶詰など' },
-    { id:'w3', text:'水の浄化グッズ（浄水フィルター・浄水錠）', priority:'high', family:['all'] },
-    { id:'w4', text:'赤ちゃん用粉ミルク・離乳食', priority:'critical', family:['baby'] },
-    { id:'w5', text:'高齢者向け介護食・栄養補助食品', priority:'high', family:['elderly'] },
-    { id:'w6', text:'ペット用水・ペットフード（3日分）', priority:'critical', family:['pet'] },
+    { id:'w1', text:'飲料水（1人1日3L × 3日分）', priority:'critical', family:['all'], note:'2Lペットボトルを家族分確保', detail:'災害時は水道が止まります。飲料水・調理用・衛生用の3用途で大量の水が必要です。家族3人なら2Lペットボトルを18本程度を目安に。', examples:'アサヒ飲料・いろはす・クリスタルガイザーなど', price:'¥3,000-5,000（2L×9本×2パック）', tip:'消費期限を確認し、定期的にローテーション。キャンプやドライブ時に消費して新しいものを補充する方法が効果的です。' },
+    { id:'w2', text:'非常食・乾パン・レトルト（3日分）', priority:'critical', family:['all'], note:'カロリーメイト・缶詰など', detail:'保存食は高カロリー・常温保存・調理不要が条件。3日分の目安は1人1日3食×3日×家族数。', examples:'カロリーメイト、えいようかん、缶詰パン、白粥缶詰など', price:'¥2,000-4,000', tip:'賞味期限が近いものから消費して、新しいものに入れ替える「ローテーション備蓄」がおすすめ。' },
+    { id:'w3', text:'水の浄化グッズ（浄水フィルター・浄水錠）', priority:'high', family:['all'], detail:'断水時に雨水や川の水を飲み水に変える重要なアイテム。フィルターまたは錠剤型の両方があると安心です。', examples:'ブリタフィルター、LifeStraw、浄水錠（コッフェルなど）', price:'¥1,000-3,000', tip:'フィルターは定期的に交換が必要。錠剤型は軽量でバックパック向けです。' },
+    { id:'w4', text:'赤ちゃん用粉ミルク・離乳食', priority:'critical', family:['baby'], detail:'赤ちゃんは普通の食事ができません。常温で食べられるスティック型・キューブ型ミルクと、月齢に合った離乳食を3日分用意してください。', examples:'ほほえみキューブ、グーン赤ちゃんのミルク、ベビーフード瓶詰め', price:'¥3,000-5,000', tip:'定期的に食べて新しいものに交換。赤ちゃんの月齢とともに内容を更新します。' },
+    { id:'w5', text:'高齢者向け介護食・栄養補助食品', priority:'high', family:['elderly'], detail:'飲み込みや咀嚼が困難な高齢者のため、柔らかく消化しやすい食事が必須。栄養補助食品も同様に重要です。', examples:'アイソカル、ニュートリー、高齢者向けレトルト粥', price:'¥2,000-4,000', tip:'本人の嚥下能力に合わせて、介護食のレベルを選んでください。' },
+    { id:'w6', text:'ペット用水・ペットフード（3日分）', priority:'critical', family:['pet'], detail:'ペットも家族です。いつも食べているドライフード・缶詰・水をペット用バッグに3日分入れてください。', examples:'いつものペットフード、ペット用飲料水、おやつ', price:'¥1,500-3,000', tip:'ペット用水は念のため複数本。フードは小分けできる袋に詰め替えるのがコンパクト。' },
   ]},
   { cat: '🩺 救急・医療', items: [
-    { id:'m1', text:'救急セット（絆創膏・ガーゼ・包帯・消毒液）', priority:'critical', family:['all'] },
-    { id:'m2', text:'常備薬（頭痛薬・胃薬・解熱剤）', priority:'high', family:['all'] },
-    { id:'m3', text:'体温計・血圧計（小型）', priority:'medium', family:['all'] },
-    { id:'m4', text:'持病の薬（最低7日分）', priority:'critical', family:['medical'] },
-    { id:'m5', text:'お薬手帳（コピー可）', priority:'high', family:['medical'] },
-    { id:'m6', text:'おむつ・おしりふき', priority:'critical', family:['baby'] },
-    { id:'m7', text:'高齢者用おむつ・衛生用品', priority:'high', family:['elderly'] },
-    { id:'m8', text:'ペット用薬・ペット手帳', priority:'high', family:['pet'] },
+    { id:'m1', text:'救急セット（絆創膏・ガーゼ・包帯・消毒液）', priority:'critical', family:['all'], detail:'ケガ・感染症予防の基本。ガーゼ・絆創膏・包帯・消毒液をセットで備えることが大切です。市販の救急セットか自分で詰める方法があります。', examples:'ジョンソン・エンド・ジョンソン救急セット、ダイソー救急セット', price:'¥800-2,500', tip:'使用期限を確認し、年1回は中身を確認・補充してください。' },
+    { id:'m2', text:'常備薬（頭痛薬・胃薬・解熱剤）', priority:'high', family:['all'], detail:'ストレスや環境変化で頭痛・下痢・風邪症状が出ることがあります。よく使う薬を一式揃えてください。', examples:'バファリン、正露丸、ロキソニン、総合感冒薬', price:'¥1,500-3,000', tip:'処方薬ではなく市販薬で対応。家族全員で必要な薬をリストアップしてください。' },
+    { id:'m3', text:'体温計・血圧計（小型）', priority:'medium', family:['all'], detail:'避難所では感染症が蔓延しやすいため、健康管理が重要です。小型タイプなら非常持ち出し袋に入ります。', examples:'オムロン電子体温計（わき用・耳式）、小型血圧計', price:'¥1,500-4,000', tip:'電池式より充電式の方が長く使えます。使い方も事前に確認しておいてください。' },
+    { id:'m4', text:'持病の薬（最低7日分）', priority:'critical', family:['medical'], detail:'高血圧・糖尿病・喘息など持病がある場合、3日ではなく最低1週間分を用意してください。', examples:'医師から処方された薬を小分けボトルに保管', price:'¥2,000-5,000', tip:'処方箋の写しやお薬手帳のコピーも一緒に保管。薬局で「防災用の薬を7日分準備したい」と相談してください。' },
+    { id:'m5', text:'お薬手帳（コピー可）', priority:'high', family:['medical'], detail:'避難先で医療が受ける時、過去の投薬歴が非常に重要です。紙のコピーと写真で対応できます。', examples:'お薬手帳の原本またはコピー、スマホ写真', price:'無料', tip:'定期的にコピーを新しくしてください。デジタルコピーも有効です。' },
+    { id:'m6', text:'おむつ・おしりふき', priority:'critical', family:['baby'], detail:'赤ちゃんのおむつは1日20-30枚必要です。3日分なら60枚以上を用意してください。おしりふきも同様に重要。', examples:'パンパース、メリーズ、グーン等の赤ちゃん用おむつ', price:'¥2,500-4,500', tip:'サイズが変わることを考慮し、現在のサイズ+次のサイズを少し入れると安心です。' },
+    { id:'m7', text:'高齢者用おむつ・衛生用品', priority:'high', family:['elderly'], detail:'体の不自由な高齢者のため、尿漏れ対策が必須。パッドとおむつ両方の用意があると安心です。', examples:'アテント、ライフリーなどの高齢者用おむつ・パッド', price:'¥2,000-4,000', tip:'本人のサイズと排尿パターンを考慮して選んでください。' },
+    { id:'m8', text:'ペット用薬・ペット手帳', priority:'high', family:['pet'], detail:'ペットも人間と同じく、予防接種記録や常備薬が必要です。かかりつけ動物病院の手帳コピーをバッグに入れてください。', examples:'予防接種記録、常用薬、狂犬病予防接種済み証', price:'無料', tip:'デジタル写真でも対応可能。複数の紙コピーもあると良いです。' },
   ]},
   { cat: '🔦 ライト・電源', items: [
-    { id:'l1', text:'懐中電灯（LED・電池式）', priority:'critical', family:['all'] },
-    { id:'l2', text:'電池（単1〜単4 各種）', priority:'critical', family:['all'] },
-    { id:'l3', text:'モバイルバッテリー（大容量10,000mAh以上）', priority:'critical', family:['all'] },
-    { id:'l4', text:'ランタン（テント用等）', priority:'high', family:['all'] },
-    { id:'l5', text:'ラジオ（電池・手動発電式）', priority:'high', family:['all'] },
-    { id:'l6', text:'ろうそく・ライター', priority:'medium', family:['all'] },
+    { id:'l1', text:'懐中電灯（LED・電池式）', priority:'critical', family:['all'], detail:'停電時に最も大切なアイテム。LED は電池が長持ちしますし、発熱が少ないので安全です。重さは500g以下が目安。', examples:'パナソニック強力ライト、レッドレンザー、LEDLENSER', price:'¥1,500-3,500', tip:'予備電池も複数本入れてください。頭に装着できるヘッドライトがあると両手が空いて便利です。' },
+    { id:'l2', text:'電池（単1〜単4 各種）', priority:'critical', family:['all'], detail:'懐中電灯・ラジオ・体温計など、様々な電池が必要です。単3・単4を最低でも8-10本ずつ用意。', examples:'パナソニックなどの一般電池、充電池より使い捨て推奨', price:'¥800-1,500', tip:'防災用は「電池式」を選び、液漏れを防ぐため年1回チェックしてください。' },
+    { id:'l3', text:'モバイルバッテリー（大容量10,000mAh以上）', priority:'critical', family:['all'], detail:'スマートフォンは避難時の重要なツール。10,000mAh以上で最大50回は充電可能。USB-C/Lightning両対応が理想。', examples:'Anker PowerCore、Xiaomi Mi Power Bank', price:'¥2,000-4,000', tip:'定期的に満充電・放電してメンテナンスしてください。ソーラー充電できるタイプも検討価値あり。' },
+    { id:'l4', text:'ランタン（テント用等）', priority:'high', family:['all'], detail:'懐中電灯より広い範囲を照らします。キャンプ用のLEDランタンなら電池が長持ちして安全。', examples:'コールマン LEDランタン、Gentos LED ランタン', price:'¥1,500-3,000', tip:'吊り下げ可能なタイプが避難所で便利です。複数個あると活躍します。' },
+    { id:'l5', text:'ラジオ（電池・手動発電式）', priority:'high', family:['all'], detail:'避難時に情報を得る重要な手段。手動発電式なら電池がなくても使えます。AM/FM両対応は必須。', examples:'パナソニック手回しラジオ、SONY高感度ラジオ', price:'¥2,000-5,000', tip:'スマートフォンのラジオアプリも併用。首からかけられるポータブルタイプが便利です。' },
+    { id:'l6', text:'ろうそく・ライター', priority:'medium', family:['all'], detail:'懐中電灯の補助照明。ただし火災リスクがあるため、避難所ではLED製品推奨。自宅避難の場合に活躍。', examples:'長時間ろうそく、防災用ろうそく、100均ライター', price:'¥500-1,000', tip:'ろうそくは倒れにくい固い容器に入れてください。避難所ではLEDに切り替えが安全です。' },
   ]},
   { cat: '📄 書類・現金', items: [
-    { id:'d1', text:'現金（硬貨含む1〜2万円）', priority:'critical', family:['all'], note:'ATM・カード使用不可に備えて' },
-    { id:'d2', text:'身分証のコピー（免許・保険証・マイナンバー）', priority:'critical', family:['all'] },
-    { id:'d3', text:'通帳・保険証券のコピー', priority:'high', family:['all'] },
-    { id:'d4', text:'家族の連絡先リスト（紙に書いたもの）', priority:'critical', family:['all'] },
-    { id:'d5', text:'ハザードマップ・避難場所の地図', priority:'high', family:['all'] },
+    { id:'d1', text:'現金（硬貨含む1〜2万円）', priority:'critical', family:['all'], note:'ATM・カード使用不可に備えて', detail:'災害時は停電でATMが使えない場合が多いです。1〜2万円の現金、特に千円札と小銭を用意してください。', examples:'日本銀行券、硬貨混合', price:'¥10,000-20,000', tip:'札は防水ポリ袋に入れてください。定期的に新札に交換しましょう。' },
+    { id:'d2', text:'身分証のコピー（免許・保険証・マイナンバー）', priority:'critical', family:['all'], detail:'身分確認が必要になる場合があります。原本の写真やコピーを複数枚、別々の場所に保管してください。', examples:'運転免許証、健康保険証、マイナンバーカードのコピー', price:'無料', tip:'デジタルコピー（スマートフォン撮影）も別途用意。クラウド保存も有効です。' },
+    { id:'d3', text:'通帳・保険証券のコピー', priority:'high', family:['all'], detail:'銀行・保険会社との手続きに必要。コピーと写真での保管で対応可能です。', examples:'銀行通帳、生命保険・火災保険証券のコピー', price:'無料', tip:'定期的に最新のコピーに更新してください。デジタルコピーも良いです。' },
+    { id:'d4', text:'家族の連絡先リスト（紙に書いたもの）', priority:'critical', family:['all'], detail:'スマートフォンが使えなくなることもあります。父・母・兄弟・親友など重要な連絡先を紙に手書きしてください。', examples:'手書きまたは印刷した連絡先リスト', price:'無料', tip:'集合場所も一緒に書いておいてください。家族全員が見ても分かるように大きな文字で。' },
+    { id:'d5', text:'ハザードマップ・避難場所の地図', priority:'high', family:['all'], detail:'自宅周辺の災害リスク（浸水・土砂災害など）を知ることが極めて重要。市役所で入手・ダウンロード可能です。', examples:'市町村発行ハザードマップ、地元の避難場所マップ', price:'無料', tip:'避難経路を赤ペンで線引いて、家族全員で確認しておいてください。' },
     { id:'d6', text:'母子手帳・医療情報のコピー', priority:'critical', family:['baby'] },
   ]},
   { cat: '👗 衣類・生活用品', items: [
-    { id:'c1', text:'着替え（3日分・防寒着含む）', priority:'high', family:['all'] },
-    { id:'c2', text:'レインコート・雨具', priority:'high', family:['all'] },
-    { id:'c3', text:'軍手・作業用手袋', priority:'high', family:['all'] },
-    { id:'c4', text:'ビニール袋（大中小各種）', priority:'medium', family:['all'] },
-    { id:'c5', text:'ウェットティッシュ・消臭剤', priority:'medium', family:['all'] },
-    { id:'c6', text:'アルコール消毒液・マスク', priority:'high', family:['all'] },
-    { id:'c7', text:'ロープ・ガムテープ', priority:'medium', family:['all'] },
-    { id:'c8', text:'ペット用キャリーバッグ・リード', priority:'critical', family:['pet'] },
+    { id:'c1', text:'着替え（3日分・防寒着含む）', priority:'high', family:['all'], detail:'避難所は気温差が大きいことがあります。下着3日分+防寒着（薄いセーター）を真空パック等でコンパクトに。季節に合わせて入れ替えてください。', examples:'下着、靴下、セーター、ジャージ', price:'¥1,500-3,000', tip:'夏は冷房対策に薄い長袖、冬は防寒着が必須。子どもの成長に合わせてサイズを確認してください。' },
+    { id:'c2', text:'レインコート・雨具', priority:'high', family:['all'], detail:'移動中に雨に遭遇することがあります。傘よりもレインコート・ポンチョがおすすめ。両手が自由になります。', examples:'レインコート、ポンチョ、防水シート', price:'¥800-2,000', tip:'大きめのサイズを選ぶと、重い荷物の上に被せることもできます。' },
+    { id:'c3', text:'軍手・作業用手袋', priority:'high', family:['all'], detail:'がれき撤去やロープ作業で手を守ります。綿製とゴム製、両方あると便利です。', examples:'綿軍手、ゴム手袋、革作業手袋', price:'¥500-1,500', tip:'複数サイズ（大人・子ども）を用意。すぐに汚れるので複数双入手がおすすめ。' },
+    { id:'c4', text:'ビニール袋（大中小各種）', priority:'medium', family:['all'], detail:'荷物整理、トイレ、防水、分別など多用途。大・中・小の詰め替え用をいくつか入れてください。', examples:'ゴミ袋、レジ袋、防水用ビニール袋', price:'¥300-800', tip:'45L・30L・10L程度の大きさを混ぜて。厚手が破れにくいです。' },
+    { id:'c5', text:'ウェットティッシュ・消臭剤', priority:'medium', family:['all'], detail:'水が貴重なため、全身を拭く際に活躍。消臭剤は身体の匂い対策に有効です。', examples:'ウェットティッシュ、制汗ウェットシート、消臭スプレー', price:'¥800-1,500', tip:'アルコールタイプではなく優しいタイプがおすすめ。肌が敏感な方は特に配慮。' },
+    { id:'c6', text:'アルコール消毒液・マスク', priority:'high', family:['all'], detail:'感染症対策が必須。消毒液はハンドジェルタイプなら携帯しやすく、マスクは複数枚（20枚以上）を用意。', examples:'キレイキレイ、手指消毒液、不織布マスク', price:'¥1,500-3,000', tip:'定期的に新しいマスクに交換。アルコール品は火気注意。' },
+    { id:'c7', text:'ロープ・ガムテープ', priority:'medium', family:['all'], detail:'荷物を縛ったり、テント張り、応急修理など多用途。3-5メートル程度のロープとガムテープ両方が理想。', examples:'ナイロンロープ（直径6-8mm）、布テープ', price:'¥800-1,500', tip:'モノフィラメント製より綿ロープが使いやすいです。ガムテープは粘着性が落ちるので定期交換。' },
+    { id:'c8', text:'ペット用キャリーバッグ・リード', priority:'critical', family:['pet'], detail:'ペットを安全に避難させるために必須。キャリーは通気性が良く、ペットがくつろげるサイズが理想。', examples:'ペット用キャリーバッグ、ハーネス付きリード', price:'¥2,000-5,000', tip:'定期的にペットを入れて「バッグに慣れさせる」訓練をしておいてください。' },
   ]},
   { cat: '📱 通信・情報収集', items: [
-    { id:'t1', text:'スマートフォンの充電ケーブル', priority:'critical', family:['all'] },
-    { id:'t2', text:'防水スマホカバー・防水ケース', priority:'high', family:['all'] },
-    { id:'t3', text:'ラジオアプリの設定・使い方確認', priority:'medium', family:['all'] },
-    { id:'t4', text:'警戒レベルアラートの設定（ヤフー防災等）', priority:'high', family:['all'] },
+    { id:'t1', text:'スマートフォンの充電ケーブル', priority:'critical', family:['all'], detail:'避難時の最重要デバイス。USB-C・Lightning両対応ケーブル、または複数のケーブルを持つことが理想。短いケーブル（1m）がバッグに詰めやすい。', examples:'Apple Lightning ケーブル、USB-C ケーブル、複数充電ケーブル', price:'¥500-1,500', tip:'モバイルバッテリーと組み合わせて複数回充電可能に。ケーブルは劣化するので定期交換。' },
+    { id:'t2', text:'防水スマホカバー・防水ケース', priority:'high', family:['all'], detail:'豪雨や津波のリスク軽減。タッチ操作可能な防水ケースなら避難所での通話も容易。IP67/IP68等級推奨。', examples:'LifeProof ケース、Spigen 防水ケース、防水ポーチ', price:'¥1,500-3,500', tip:'定期的に防水性を確認。劣化すると水が入りやすくなります。' },
+    { id:'t3', text:'ラジオアプリの設定・使い方確認', priority:'medium', family:['all'], detail:'スマートフォンにラジオアプリをインストール・設定しておく。NHK ラジオ らじる★らじるなど複数を登録。実際に使ってみることが大切。', examples:'NHK ラジオ らじる★らじる、radiko.jp、TuneIn Radio', price:'無料', tip:'家族全員が操作できるように事前に説明しておいてください。' },
+    { id:'t4', text:'警戒レベルアラートの設定（ヤフー防災等）', priority:'high', family:['all'], detail:'災害が迫ってきたときに即座に知ることが大切。Yahoo!防災アプリ、NHK ニュース・防災など複数登録。プッシュ通知 ON にしておく。', examples:'Yahoo!防災、NHK ニュース・防災、気象庁アプリ', price:'無料', tip:'定期的に通知が来ているか確認。バッテリー節約モード時も通知が来るか確認が重要。' },
   ]},
 ];
 
 let checkedItems = JSON.parse(localStorage.getItem('emergencyChecked') || '{}');
+let expandedCategories = JSON.parse(localStorage.getItem('expandedCategories') || '{}');
 let activeFamily = 'all';
+let searchQuery = '';
 
 function filterFamily(btn, family) {
   document.querySelectorAll('.family-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   activeFamily = family;
+  renderChecklist();
+}
+
+function filterSearch(query) {
+  searchQuery = query.toLowerCase();
+  renderChecklist();
+}
+
+function toggleCategory(catName) {
+  expandedCategories[catName] = !expandedCategories[catName];
+  localStorage.setItem('expandedCategories', JSON.stringify(expandedCategories));
   renderChecklist();
 }
 
@@ -330,31 +622,48 @@ function isVisible(item) {
 
 function renderChecklist() {
   let html = '';
-  CHECKLIST.forEach(cat => {
+  CHECKLIST.forEach((cat, catIdx) => {
     const visItems = cat.items.filter(isVisible);
-    if (!visItems.length) return;
-    const checkedCount = visItems.filter(i => checkedItems[i.id]).length;
-    const pct = Math.round(checkedCount / visItems.length * 100);
+    let filteredItems = visItems;
+    if (searchQuery) {
+      filteredItems = visItems.filter(item => item.text.toLowerCase().includes(searchQuery));
+    }
+    if (!filteredItems.length) return;
+    const checkedCount = filteredItems.filter(i => checkedItems[i.id]).length;
+    const pct = Math.round(checkedCount / filteredItems.length * 100);
+    const barColor = pct < 30 ? '#e53935' : pct < 60 ? '#ff9800' : pct < 100 ? '#66bb6a' : '#42a5f5';
+    const isExpanded = expandedCategories[cat.cat] !== false;
     html += `<div class="card category-section">
-      <div class="cat-header">
-        <div class="cat-title">${cat.cat}</div>
-        <div class="cat-progress">${checkedCount}/${visItems.length} (${pct}%)</div>
+      <div class="cat-header" onclick="toggleCategory('${cat.cat.replace(/'/g, "\\'")}'); return false;" style="cursor:pointer;">
+        <div class="cat-header-row">
+          <div style="display:flex;align-items:center;gap:0.5rem;flex:1;">
+            <span style="font-size:1.2rem;transition:transform 0.2s;transform:${isExpanded ? 'rotate(90deg)' : 'rotate(0deg)'};">▶</span>
+            <div class="cat-title">${cat.cat}</div>
+          </div>
+          <div class="cat-progress" id="cat-prog-${catIdx}">${checkedCount}/${filteredItems.length} (${pct}%)</div>
+        </div>
+        <div class="cat-mini-bar-bg">
+          <div class="cat-mini-bar-fill" id="cat-bar-${catIdx}" style="width:${pct}%;background:${barColor};"></div>
+        </div>
       </div>
-      <div class="item-list">
-        ${visItems.map(item => {
+      ${isExpanded ? `<div class="item-list">
+        ${filteredItems.map(item => {
           const cls = ['critical','high','medium'].includes(item.priority) ? `p-${item.priority}` : '';
           const label = { critical:'必須', high:'重要', medium:'推奨' }[item.priority] || '';
           const isChecked = !!checkedItems[item.id];
           return `<div class="item-row">
-            <input type="checkbox" class="item-checkbox" id="cb-${item.id}" ${isChecked?'checked':''} onchange="toggle('${item.id}')" aria-label="入力フォーム">
+            <input type="checkbox" class="item-checkbox" id="cb-${item.id}" ${isChecked?'checked':''} onchange="toggle('${item.id}')" aria-label="${item.text.replace(/"/g, '&quot;')}">
             <label for="cb-${item.id}" class="item-label ${isChecked?'checked':''}">
               ${item.text}
               ${item.note ? `<div class="item-note">💡 ${item.note}</div>` : ''}
             </label>
-            <span class="item-priority ${cls}">${label}</span>
+            <div style="display:flex;gap:0.5rem;align-items:center;">
+              <button class="item-info-icon" onclick="openDetailModal('${item.id}')" aria-label="詳細情報を表示" title="詳細情報">ℹ️</button>
+              <span class="item-priority ${cls}">${label}</span>
+            </div>
           </div>`;
         }).join('')}
-      </div>
+      </div>` : ''}
     </div>`;
   });
   document.getElementById('checklistContainer').innerHTML = html;
@@ -375,6 +684,94 @@ function toggle(id) {
   updateScore();
 }
 
+// M7: シミュレーション用パターン定義
+const PATTERNS = {
+  single: { label:'一人暮らし', families:['all'] },
+  family3: { label:'家族3人', families:['all'] },
+  family_baby: { label:'乳幼児+両親', families:['all','baby'] },
+  family_elderly: { label:'高齢者+両親', families:['all','elderly'] },
+  custom: { label:'カスタム', families:[] }
+};
+
+// M7: パターン別アイテム計算
+function calculatePatternItems(families) {
+  const items = CHECKLIST.flatMap(c => c.items.filter(item =>
+    families.some(f => item.family.includes(f))
+  ));
+  const critical = items.filter(i => i.priority === 'critical').length;
+  const total = items.length;
+  return { critical, total, pct: total > 0 ? Math.round(critical / total * 100) : 0 };
+}
+
+// M7: 比較表を更新
+function updateCompareTable() {
+  let html = '';
+  Object.entries(PATTERNS).forEach(([key, pattern]) => {
+    if (key === 'custom') return;
+    const calc = calculatePatternItems(pattern.families);
+    const scoreColor = calc.pct < 30 ? '#e53935' : calc.pct < 60 ? '#ff9800' : '#66bb6a';
+    html += `<tr style="background:#fff;border:1px solid #e2e8f0;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='#fff'">
+      <td style="padding:0.6rem 0.8rem;border:1px solid #e2e8f0;color:#374151;font-weight:600;">${pattern.label}</td>
+      <td style="padding:0.6rem 0.8rem;border:1px solid #e2e8f0;text-align:center;color:#e65100;font-weight:700;">${calc.critical}</td>
+      <td style="padding:0.6rem 0.8rem;border:1px solid #e2e8f0;text-align:center;color:#1e293b;font-weight:600;">${calc.total}</td>
+      <td style="padding:0.6rem 0.8rem;border:1px solid #e2e8f0;text-align:center;">
+        <span style="background:${scoreColor};color:#fff;padding:0.2rem 0.6rem;border-radius:4px;font-weight:700;font-size:0.75rem;">${calc.pct}%</span>
+      </td>
+    </tr>`;
+  });
+  const tbody = document.getElementById('compareTableBody');
+  if (tbody) tbody.innerHTML = html;
+}
+
+// M7: パターン選択
+function selectComparePattern(pattern) {
+  document.querySelectorAll('[onclick*="selectComparePattern"]').forEach(btn =>
+    btn.classList.remove('active')
+  );
+  event.target.classList.add('active');
+}
+
+// M7: カスタムシミュレーションモーダル
+function openSimulationModal() {
+  document.getElementById('simulationModal').style.display = 'flex';
+  document.getElementById('simulationModal').style.alignItems = 'center';
+  document.getElementById('simulationModal').style.justifyContent = 'center';
+  updateSimulation();
+}
+
+function closeSimulationModal() {
+  document.getElementById('simulationModal').style.display = 'none';
+}
+
+// M7: シミュレーション更新
+function updateSimulation() {
+  const families = ['all'];
+  const recommendations = [];
+
+  if (document.getElementById('sim-baby')?.checked) {
+    families.push('baby');
+    recommendations.push('おむつ（60枚+）');
+  }
+  if (document.getElementById('sim-elderly')?.checked) {
+    families.push('elderly');
+    recommendations.push('高齢者用食品・常用薬');
+  }
+  if (document.getElementById('sim-pet')?.checked) {
+    families.push('pet');
+    recommendations.push('ペットフード・キャリーバッグ');
+  }
+  if (document.getElementById('sim-medical')?.checked) {
+    families.push('medical');
+    recommendations.push('常用薬（7日分）・お薬手帳');
+  }
+
+  const calc = calculatePatternItems(families);
+  const recommendText = recommendations.length > 0 ? recommendations.join(' / ') : '基本セット';
+
+  document.getElementById('simItemCount').innerHTML = `<strong>${calc.total}アイテム</strong> (必須: ${calc.critical})`;
+  document.getElementById('simRecommend').textContent = recommendText;
+}
+
 function updateScore() {
   const allItems = CHECKLIST.flatMap(c => c.items.filter(isVisible));
   const checkedCount = allItems.filter(i => checkedItems[i.id]).length;
@@ -383,17 +780,93 @@ function updateScore() {
   const bar = document.getElementById('scoreBar');
   bar.style.width = pct + '%';
   bar.className = 'score-bar-fill ' + (pct < 30 ? 'low' : pct < 60 ? 'mid' : pct < 90 ? 'high' : 'max');
-  const label = pct < 30 ? '⚠️ 準備が不十分です。今すぐ始めましょう！' :
-    pct < 60 ? '📋 準備中です。もう少し揃えましょう。' :
-    pct < 90 ? '👍 だいぶ揃ってきました。残りも確認を！' :
-    '✅ 素晴らしい！万全の備えができています！';
-  document.getElementById('scoreLabel').textContent = `${checkedCount}/${allItems.length}項目 - ${label}`;
-  // Update cat progress
-  CHECKLIST.forEach(cat => {
+  bar.textContent = pct > 5 ? pct + '%' : '';
+  const label = pct < 30 ? '⚠️ 準備が不十分です' :
+    pct < 60 ? '📋 準備中です' :
+    pct < 90 ? '👍 だいぶ揃ってきました' :
+    '✅ 万全の備えができています';
+  document.getElementById('scoreLabel').innerHTML = `<div style="font-size:1.1rem;color:#1e293b;margin-bottom:0.3rem;font-weight:700;">${checkedCount}/${allItems.length}項目</div><div style="font-size:0.9rem;color:#64748b;">${label}</div>`;
+  // カテゴリ別進捗をDOMで直接更新
+  const catData = CHECKLIST.map((cat, catIdx) => {
     const visItems = cat.items.filter(isVisible);
-    if (!visItems.length) return;
-    const cc = visItems.filter(i => checkedItems[i.id]).length;
-  });
+    let filteredItems = visItems;
+    if (searchQuery) filteredItems = visItems.filter(i => i.text.toLowerCase().includes(searchQuery));
+    if (!filteredItems.length) return null;
+    const cc = filteredItems.filter(i => checkedItems[i.id]).length;
+    const cpct = Math.round(cc / filteredItems.length * 100);
+    const barColor = cpct < 30 ? '#e53935' : cpct < 60 ? '#ff9800' : cpct < 100 ? '#66bb6a' : '#42a5f5';
+    const progEl = document.getElementById('cat-prog-' + catIdx);
+    const barEl = document.getElementById('cat-bar-' + catIdx);
+    if (progEl) progEl.textContent = `${cc}/${filteredItems.length} (${cpct}%)`;
+    if (barEl) { barEl.style.width = cpct + '%'; barEl.style.background = barColor; }
+    return { name: cat.cat, pct: cpct };
+  }).filter(Boolean);
+
+  // M4: チャート更新
+  if (catData.length > 0) {
+    document.getElementById('chartsContainer').style.display = '';
+    drawCategoryChart(catData);
+  }
+
+  // 100%達成エフェクト
+  if (pct === 100) showCelebration();
+  else hideCelebration();
+}
+
+// M4: Chart.js visualization
+let categoryChartInstance = null;
+
+function drawCategoryChart(catData) {
+  const ctx = document.getElementById('categoryChart');
+  if (!ctx) return;
+
+  if (categoryChartInstance) {
+    categoryChartInstance.data.labels = catData.map(c => c.name);
+    categoryChartInstance.data.datasets[0].data = catData.map(c => c.pct);
+    categoryChartInstance.update();
+  } else {
+    categoryChartInstance = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: catData.map(c => c.name),
+        datasets: [{
+          data: catData.map(c => c.pct),
+          backgroundColor: ['#e65100', '#2196F3', '#4CAF50', '#FF9800', '#F44336', '#9C27B0'],
+          borderColor: '#fff',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'right',
+            labels: { font: { size: 12 }, padding: 15 }
+          },
+          tooltip: {
+            callbacks: {
+              label: ctx => ctx.parsed + '%'
+            }
+          }
+        }
+      }
+    });
+  }
+}
+
+function showCelebration() {
+  if (document.getElementById('celebrateBanner')) return;
+  const banner = document.createElement('div');
+  banner.id = 'celebrateBanner';
+  banner.className = 'celebrate-banner';
+  banner.innerHTML = '🎉 万全の備えができています！お見事です！<br>家族全員の安全を守る準備が整いました。定期的に点検して備えを維持しましょう。';
+  document.querySelector('.score-display').appendChild(banner);
+}
+
+function hideCelebration() {
+  const b = document.getElementById('celebrateBanner');
+  if (b) b.remove();
 }
 
 function resetAll() {
@@ -403,12 +876,55 @@ function resetAll() {
   renderChecklist();
 }
 
+function exportChecklist() {
+  const allItems = CHECKLIST.flatMap(c => c.items.filter(isVisible));
+  const checkedCount = allItems.filter(i => checkedItems[i.id]).length;
+  const pct = Math.round(checkedCount / allItems.length * 100);
+
+  let text = '防災チェックリスト - エクスポート\n';
+  text += '=' .repeat(40) + '\n\n';
+  text += `出力日時: ${new Date().toLocaleString('ja-JP')}\n`;
+  text += `準備状況: ${checkedCount}/${allItems.length}項目 (${pct}%)\n`;
+  text += '\n' + '=' .repeat(40) + '\n\n';
+
+  CHECKLIST.forEach(cat => {
+    const visItems = cat.items.filter(isVisible);
+    if (!visItems.length) return;
+    text += `【${cat.cat}】\n`;
+    visItems.forEach(item => {
+      const checked = checkedItems[item.id] ? '✓' : '☐';
+      text += `${checked} ${item.text}\n`;
+    });
+    text += '\n';
+  });
+
+  text += '=' .repeat(40) + '\n';
+  text += '※ 本チェックリストの出力日時のバージョンです\n';
+
+  const blob = new Blob([text], { type: 'text/plain; charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `emergency-checklist-${new Date().toISOString().split('T')[0]}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
 renderChecklist();
+updateCompareTable();
+
+// M7: モーダル背景クリック時に閉じる
+document.getElementById('simulationModal')?.addEventListener('click', e => {
+  if (e.target.id === 'simulationModal') closeSimulationModal();
+});
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"防災チェックリスト【無料】非常持ち出し袋の準備状況を診断","description":"防災グッズの準備状況をチェックリストで確認。家族構成別の必要アイテムを自動提案。","url":"https://appadaycreator.com/emergency-bag-checker/","applicationCategory":"UtilityApplication","operatingSystem":"Any","inLanguage":"ja","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"}}</script>
 <div style="margin:16px auto;max-width:800px;padding:14px;background:#fff8f0;border:1px solid #fed7aa;border-radius:12px;"><p style="font-size:0.82rem;font-weight:bold;color:#c2410c;margin-bottom:8px;">📦 関連おすすめ商品</p><div style="display:flex;flex-wrap:wrap;gap:8px;"><a class="js-track-affiliate" href="https://www.amazon.co.jp/s?k=防災+非常持ち出し袋+グッズ&tag=appadaycrea0f-22" target="_blank" rel="noopener" style="background:#ff9900;color:#fff;padding:7px 12px;border-radius:7px;font-size:0.8em;font-weight:bold;text-decoration:none;" data-platform="Amazon" data-item-name="防災非常持ち出し袋グッズ" data-link-type="affiliate_link">🛒 防災グッズ・非常食 →</a><a class="js-track-affiliate" href="https://www.amazon.co.jp/s?k=防災+非常持ち出し袋+グッズ&tag=appadaycrea0f-22" target="_blank" rel="noopener" style="background:#146eb4;color:#fff;padding:7px 12px;border-radius:7px;font-size:0.8em;font-weight:bold;text-decoration:none;" data-platform="Amazon" data-item-name="防災非常持ち出し袋グッズ" data-link-type="affiliate_link">📚 防災対策・備え方の本 →</a></div></div>
+<div class="max-w-2xl mx-auto px-4 mb-4">
 <!-- Related Services -->
-<section style="margin-top:28px;padding:20px 16px;background:#f8fafc;border-radius:12px;">
+<section class="bg-white rounded-2xl shadow-md p-5">
   <h3 style="font-size:14px;font-weight:700;color:#64748b;margin-bottom:12px;letter-spacing:0.03em;">関連サービス</h3>
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
     <a href="https://appadaycreator.com/craft-material-calculator/" class="related-link">手芸・クラフト材料費計算ツール</a>
@@ -417,44 +933,66 @@ renderChecklist();
     <a href="https://appadaycreator.com/logic-grid-puzzle/" class="related-link">論理グリッドパズル</a>
   </div>
 </section>
+</div>
 
     
-    <!-- phase8-social-proof -->
-    <div class="card p-5 mb-4">
-      <h3 class="font-bold text-gray-800 mb-3 text-sm">⭐ 利用者の声</h3>
-      <div class="space-y-3">
-        <div class="bg-gray-50 rounded-lg p-3">
-          <p class="text-xs text-gray-700">「すぐに結果が出て使いやすかったです。友人にも勧めました！」</p>
-          <p class="text-xs text-gray-400 mt-1">— 田中さん（30代・会社員）★★★★★</p>
-        </div>
-        <div class="bg-gray-50 rounded-lg p-3">
-          <p class="text-xs text-gray-700">「無料でここまで詳しく調べられるとは思いませんでした。」</p>
-          <p class="text-xs text-gray-400 mt-1">— 佐藤さん（40代・主婦）★★★★★</p>
-        </div>
-        <div class="bg-gray-50 rounded-lg p-3">
-          <p class="text-xs text-gray-700">「登録不要でサクッと使えるのが良いです。また利用します。」</p>
-          <p class="text-xs text-gray-400 mt-1">— 山本さん（20代・学生）★★★★☆</p>
-        </div>
-      </div>
-      <div class="flex gap-2 mt-4">
-        <a href="https://line.me/R/share?text=防災チェックリスト非常持ち出し袋の準備状況を診断%20https://appadaycreator.com/emergency-bag-checker/" target="_blank" rel="noopener"
-           style="flex:1;display:block;text-align:center;background:#06C755;color:white;padding:8px;border-radius:8px;font-size:12px;font-weight:bold;text-decoration:none;">
-          LINEでシェア
-        </a>
-        <a href="https://twitter.com/intent/tweet?text=防災チェックリスト非常持ち出し袋の準備状況を診断&url=https://appadaycreator.com/emergency-bag-checker/&via=appadaycreator" target="_blank" rel="noopener"
-           style="flex:1;display:block;text-align:center;background:#000;color:white;padding:8px;border-radius:8px;font-size:12px;font-weight:bold;text-decoration:none;">
-          Xでシェア
-        </a>
-      </div>
-    </div>
-    <!-- rakuten-affiliate-block -->
-    <div style="border:1px solid #BF0000;background:#fff9f9;border-radius:10px;padding:14px;margin:12px auto;max-width:480px;text-align:center;">
-      <p style="font-size:0.85rem;color:#4b5563;margin-bottom:8px;">🛒 関連商品を楽天市場で探す</p>
-      <a href="https://hb.afl.rakuten.co.jp/ichiba/541ad0d2.ce2bed12.541ad0d3.a1a2318c/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E9%2598%25B2%25E7%2581%25BD%2520%25E9%259D%259E%25E5%25B8%25B8%25E8%25A2%258B%2F&link_type=text" target="_blank" rel="nofollow sponsored noopener"
-         style="display:inline-block;background:#BF0000;color:white;padding:10px 24px;border-radius:8px;font-weight:bold;font-size:14px;text-decoration:none;">
-        楽天市場で「防災 非常袋」を検索 →
-      </a>
-    </div>
+
+<!-- r31-use-cases -->
+<div style="margin:1.5rem auto;max-width:760px;padding:0 1rem">
+<h2 style="font-size:1.125rem;font-weight:700;margin:0 0 1rem;color:#1e293b;border-left:4px solid #4f46e5;padding-left:10px">こんな方・シーンで役立ちます</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.75rem">
+</div>
+</div>
+<!-- r31-extended-faq -->
+<div style="margin:1.5rem auto;max-width:760px;padding:0 1rem">
+<div style="background:white;border-radius:16px;padding:1.5rem;box-shadow:0 4px 20px rgba(0,0,0,.08)">
+<h2 style="font-size:1.05rem;font-weight:700;margin:0 0 1rem;border-left:4px solid #4f46e5;padding-left:10px;color:#1e293b">よくある質問（詳細）</h2>
+<div style="margin-top:12px;display:flex;flex-direction:column;gap:12px">
+<div style="border:1px solid #e2e8f0;border-radius:10px;padding:12px 14px"><p style="font-weight:600;color:#1e293b;margin:0 0 6px">Q. 地震・水害・火事それぞれの避難時に気をつけることは？</p><p style="font-size:.875rem;color:#475569;line-height:1.8;margin:0">災害の種類によって避難行動が異なります。地震：揺れが収まるまで頭を守り・揺れが止まったら火の始末と出口確保、倒壊・火災の恐れがある場合はすぐに建物から避難。水害（洪水・土砂災害）：早期避難が最重要・ハザードマップで自宅のリスクを事前確認・垂直避難（2階以上への移動）も選択肢。火事：低い姿勢で逃げる・ドアをくぐる前に熱さを確認・煙を吸わないようにする・エレベーターは絶対に使わない。避難場所・経路は家族で事前に話し合っておくことが重要です。</p></div>
+<div style="border:1px solid #e2e8f0;border-radius:10px;padding:12px 14px"><p style="font-weight:600;color:#1e293b;margin:0 0 6px">Q. 自宅での備蓄は何日分用意するのが理想ですか？</p><p style="font-size:.875rem;color:#475569;line-height:1.8;margin:0">内閣府・各自治体は「最低3日分・できれば7日分」の食料・水の備蓄を推奨しています。特に大規模災害時は物資の供給が1週間以上遅れる可能性があります。水は1人1日3L（飲料2L＋生活用1L）×7日分=21Lが1人分の目安です。食料は「ローリングストック法（日常的に食べながら補充）」が推奨されており、普段食べている缶詰・レトルト・乾麺等を多めにストックし古いものから消費します。カセットコンロ・ガスボンベ（2〜3本以上）も停電・ガス停止時に役立ちます。</p></div>
+</div>
+</div>
+</div>
+<!-- r31-tool-notice -->
+<div style="margin:1.5rem auto;max-width:760px;padding:0 1rem">
+<div style="padding:1.25rem 1.5rem;background:#fef3c7;border:1px solid #fbbf24;border-radius:.75rem">
+<h3 style="font-size:1rem;font-weight:700;margin:0 0 .75rem;color:#92400e">⚠️ ご利用時の注意事項</h3>
+<ul style="margin:0;padding-left:1.25rem;font-size:.88rem;color:#78350f;line-height:2">
+<li style='margin-bottom:.4rem'>本ツールの結果はあくまで参考情報です。実際の状況に応じてご判断ください</li>
+<li style='margin-bottom:.4rem'>重要な決定（医療・法律・財務等）を行う際は必ず専門家にご相談ください</li>
+<li style='margin-bottom:.4rem'>入力データはサーバーに送信されず、すべてブラウザ内で処理されます</li>
+<li style='margin-bottom:.4rem'>本ツールの計算・診断ロジックは定期的に更新しています</li>
+</ul>
+</div>
+</div>
+<!-- r31-tool-references -->
+<div style="margin:1.5rem auto;max-width:760px;padding:0 1rem">
+<div style="padding:1.25rem 1.5rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:.75rem">
+<h3 style="font-size:1rem;font-weight:700;margin:0 0 .75rem;color:#1e293b">📚 関連する公的情報・参考リンク</h3>
+<ul style="margin:0;padding-left:1.25rem;font-size:.88rem;color:#374151;line-height:1.9">
+<li style='margin-bottom:.5rem'><a href="https://www.gov-online.go.jp/" target="_blank" rel="noopener noreferrer" style="color:#4f46e5">政府広報オンライン</a> — くらしに役立つ最新の政策・制度・行政情報</li>
+<li style='margin-bottom:.5rem'><a href="https://www.e-gov.go.jp/" target="_blank" rel="noopener noreferrer" style="color:#4f46e5">e-Gov 電子政府の総合窓口</a> — 法令・行政手続・公的制度の詳細情報</li>
+<li style='margin-bottom:.5rem'><a href="https://www.cao.go.jp/consumer/" target="_blank" rel="noopener noreferrer" style="color:#4f46e5">消費者庁</a> — 消費者の権利・安全・表示に関する公的情報</li>
+<li style='margin-bottom:.5rem'><a href="https://www.nhk.or.jp/life/" target="_blank" rel="noopener noreferrer" style="color:#4f46e5">NHK くらし解説</a> — 暮らしのさまざまな疑問をわかりやすく解説</li>
+</ul>
+</div>
+</div>
+<!-- r31-tool-about -->
+<div style="margin:1.5rem auto;max-width:760px;padding:0 1rem">
+<div style="padding:1.25rem 1.5rem;background:#f0f9ff;border:1px solid #bae6fd;border-radius:.75rem">
+<h3 style="font-size:1rem;font-weight:700;margin:0 0 .75rem;color:#0c4a6e">ℹ️ このツールについて</h3>
+<p style="margin:0;font-size:.88rem;color:#0c4a6e;line-height:1.9">「🎒 非常持ち出し袋チェッカー」はAppADayCreatorが提供する無料Webツールです。ライフスタイルに関する情報を素早く手軽に確認できます。会員登録・アプリインストール不要で、ブラウザからすぐにご利用いただけます。すべての処理はブラウザ内で完結するため、入力した情報が外部サーバーに送信されることはなく、プライバシーも保護されます。AppADayCreatorでは、日常生活のあらゆるシーンで役立つWebツールを400本以上無料で提供しています。金融・健康・育児・キャリア・旅行など幅広いカテゴリのツールをご活用ください。</p>
+</div>
+</div>
+<!-- r31-extra-guide -->
+<div style="margin:1.5rem auto;max-width:760px;padding:0 1rem">
+<div style="background:white;border-radius:16px;padding:1.5rem;box-shadow:0 4px 20px rgba(0,0,0,.06)">
+
+<h3 style="font-size:.95rem;font-weight:700;margin:1.25rem 0 .6rem;color:#1e293b">関連ツールのご紹介</h3>
+
+</div>
+</div>
+
 <!-- phase10-rakuten-updated -->
 <!-- A8アフィリエイト: スツーレ -->
 <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:14px;margin:10px 0;">
@@ -469,10 +1007,7 @@ renderChecklist();
   <p style="text-align:center;font-size:11px;font-weight:600;color:#94a3b8;margin:0 0 10px;">スポンサーリンク</p>
   <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:700px;margin:0 auto;">
     <a href="https://px.a8.net/svt/ejp?a8mat=4B3WJ6+FQ9JMY+1LP8+BY642" rel="nofollow noopener noreferrer" target="_blank" style="display:inline-block;padding:5px 12px;background:#fff;border:1px solid #d1d5db;border-radius:20px;font-size:12px;color:#4b5563;text-decoration:none;white-space:nowrap;">日々の生活にハッピーをプラス！《ハピタス》</a><img border="0" width="1" height="1" src="https://www14.a8.net/0.gif?a8mat=4B3WJ6+FQ9JMY+1LP8+BY642" alt="">
-    <a href="https://px.a8.net/svt/ejp?a8mat=4B3WJ6+FIIWRU+1IRY+1TKOKI" rel="nofollow noopener noreferrer" target="_blank" style="display:inline-block;padding:5px 12px;background:#fff;border:1px solid #d1d5db;border-radius:20px;font-size:12px;color:#4b5563;text-decoration:none;white-space:nowrap;">ファイナンシャルアカデミー「お金の教養講座」</a><img border="0" width="1" height="1" src="https://www14.a8.net/0.gif?a8mat=4B3WJ6+FIIWRU+1IRY+1TKOKI" alt="">
-    <a href="https://px.a8.net/svt/ejp?a8mat=4B3WJ6+36YZ3E+3A66+5YRHE" rel="nofollow noopener noreferrer" target="_blank" style="display:inline-block;padding:5px 12px;background:#fff;border:1px solid #d1d5db;border-radius:20px;font-size:12px;color:#4b5563;text-decoration:none;white-space:nowrap;">【販売本数No.1】ウイルスバスター</a><img border="0" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4B3WJ6+36YZ3E+3A66+5YRHE" alt="">
-    <a href="https://px.a8.net/svt/ejp?a8mat=4B3VR6+GFV6NE+3CJQ+64C3M" rel="nofollow noopener noreferrer" target="_blank" style="display:inline-block;padding:5px 12px;background:#fff;border:1px solid #d1d5db;border-radius:20px;font-size:12px;color:#4b5563;text-decoration:none;white-space:nowrap;">本・雑誌・ビジネス書が聴ける【audiobook.jp】</a><img border="0" width="1" height="1" src="https://www11.a8.net/0.gif?a8mat=4B3VR6+GFV6NE+3CJQ+64C3M" alt="">
-    <a href="https://px.a8.net/svt/ejp?a8mat=4B3WJ5+C2OQY2+14CS+68EPE" rel="nofollow noopener noreferrer" target="_blank" style="display:inline-block;padding:5px 12px;background:#fff;border:1px solid #d1d5db;border-radius:20px;font-size:12px;color:#4b5563;text-decoration:none;white-space:nowrap;">【じゃらんnet】宿・ホテル予約</a><img border="0" width="1" height="1" src="https://www13.a8.net/0.gif?a8mat=4B3WJ5+C2OQY2+14CS+68EPE" alt="">
+    <a href="https://px.a8.net/svt/ejp?a8mat=4B3WJ5+C2OQY2+14CS+68EPE" rel="nofollow noopener noreferrer" target="_blank" style="display:inline-block;padding:5px 12px;background:#fff;border:1px solid #d1d5db;border-radius:20px;font-size:12px;color:#4b5563;text-decoration:none;white-space:nowrap;">【じゃらん】国内25,000軒の宿をネットで予約OK！2％ポイント還元！</a><img border="0" width="1" height="1" src="https://www11.a8.net/0.gif?a8mat=4B3WJ5+C2OQY2+14CS+68EPE" alt="">
   </div>
 </div>
 <footer>
@@ -485,16 +1020,53 @@ renderChecklist();
   </div>
   <p>© 2026 AppADayCreator</p>
 
-        <div style="background:#fafafa;border:1px solid #e2e8f0;border-radius:10px;padding:16px;margin:10px 0;">
-            <h2 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#374151;">🔍 計算・判定の仕組み</h2>
-            <p style="font-size:12px;color:#6b7280;line-height:1.7;">家族構成・住居タイプ・地域リスクを考慮し、優先度の高い防災グッズを自動リスト化します。</p>
-            <p style="font-size:11px;color:#9ca3af;margin-top:6px;">※ 本ツールの結果はあくまで参考情報です。重要な判断の際は専門家にご相談ください。</p>
-        </div>
-        <div style="background:#f8fafc;border-top:1px solid #e2e8f0;padding:12px 16px;margin:0;font-size:11px;color:#64748b;text-align:center;line-height:1.7;">
+                <div style="background:#f8fafc;border-top:1px solid #e2e8f0;padding:12px 16px;margin:0 auto;max-width:720px;font-size:11px;color:#64748b;text-align:center;line-height:1.7;">
   <strong>免責事項</strong>：本ツールの計算・診断結果はあくまで参考情報です。本サービスの利用により生じた損害について、当サイトは一切の責任を負いません。
 </div>
   <div style="margin-top:8px;"><a href="privacy-policy.html" style="color:inherit;font-size:11px;opacity:0.7;text-decoration:underline;">プライバシーポリシー</a></div>
 <p style="text-align:center;font-size:10px;color:#9ca3af;margin-top:3px;">最終更新: 2026年5月 | 本サービスはアフィリエイト広告を掲載しています</p>
+<div style="text-align:center;margin:24px auto;max-width:760px;padding:0 16px">
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8427583028015858" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>try{(adsbygoogle = window.adsbygoogle || []).push({});}catch(e){}</script>
+</div>
+<div style="text-align:center;padding:12px 16px;font-size:.9em;"><a href="https://twitter.com/intent/tweet?url=https%3A//appadaycreator.com/emergency-bag-checker/&text=%E9%9D%9E%E5%B8%B8%E6%8C%81%E3%81%A1%E5%87%BA%E3%81%97%E8%A2%8B%E3%83%81%E3%82%A7%E3%83%83%E3%82%AB%E3%83%BC" target="_blank" rel="noopener" style="margin:4px 10px;color:#1da1f2;">𝕏でシェア</a><a href="https://line.me/R/share?text=%E9%9D%9E%E5%B8%B8%E6%8C%81%E3%81%A1%E5%87%BA%E3%81%97%E8%A2%8B%E3%83%81%E3%82%A7%E3%83%83%E3%82%AB%E3%83%BC+https%3A//appadaycreator.com/emergency-bag-checker/" target="_blank" rel="noopener" style="margin:4px 10px;color:#06c755;">LINEで送る</a></div>
 </footer>
+<div style="text-align:center;padding:10px 16px 14px;background:#eef2ff;border-top:2px solid #c7d2fe;margin-top:8px">
+<a href="/blog/" style="color:#4f46e5;font-size:.85rem;font-weight:700">📖 マネー・育児・キャリアのコラムを読む →</a>
+</div>
+<div style="background:#eef2ff;border-left:4px solid #4f46e5;border-radius:.5rem;padding:1rem 1.25rem;margin:1.5rem auto;max-width:760px;font-size:.875rem">
+<p style="margin:0 0 .5rem;font-weight:700;color:#3730a3">📖 お役立ちコラム</p>
+<ul style="margin:0;padding-left:1.25rem;color:#4f46e5;line-height:2">
+<li><a href="/blog/stock-investment-beginner/" style="color:#4f46e5">株式投資の始め方【初心者完全ガイド】</a></li>
+<li><a href="/blog/nisa-comparison/" style="color:#4f46e5">新NISA vs iDeCo 徹底比較</a></li>
+<li><a href="/blog/investment-risk-management/" style="color:#4f46e5">投資のリスク管理入門</a></li>
+</ul>
+</div>
+<!-- r17-mobile-ux -->
+<a href="#top" id="back-to-top" aria-label="ページトップへ戻る" style="display:none;position:fixed;bottom:24px;right:20px;background:#4f46e5;color:#fff;border:none;border-radius:50%;width:48px;height:48px;font-size:1.4rem;line-height:48px;text-align:center;text-decoration:none;box-shadow:0 4px 12px rgba(79,70,229,.4);z-index:9000;cursor:pointer" title="ページトップへ">↑</a>
+<script>
+(function(){
+  var btn = document.getElementById('back-to-top');
+  if(!btn) return;
+  window.addEventListener('scroll', function(){
+    btn.style.display = window.scrollY > 400 ? 'block' : 'none';
+  }, {passive:true});
+})();
+</script>
+<div style="text-align:center;margin:20px auto;max-width:728px;padding:0 16px">
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8427583028015858" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>try{(adsbygoogle = window.adsbygoogle || []).push({});}catch(e){}</script>
+</div>
+<!-- r31-cookie-banner -->
+<div id="cookie-banner" style="position:fixed;bottom:0;left:0;right:0;background:#1e293b;color:#f1f5f9;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;z-index:9999;font-size:.85rem;box-shadow:0 -2px 10px rgba(0,0,0,.3)">
+<div>当サイトはCookieおよびGoogle Analyticsを使用しています。<a href="/privacy-policy.html" style="color:#60a5fa;text-decoration:underline">プライバシーポリシー</a>をご確認ください。</div>
+<button onclick="document.getElementById('cookie-banner').style.display='none';window.grantConsent && window.grantConsent()" style="background:#3b82f6;color:#fff;border:none;padding:.5rem 1.25rem;border-radius:.375rem;font-size:.85rem;font-weight:600;cursor:pointer;white-space:nowrap">同意して閉じる</button>
+</div>
+<script>if(localStorage.getItem('cookie-consent'))document.getElementById('cookie-banner').style.display='none'</script>
+<!-- r46-org-footer -->
+<div style="text-align:center;font-size:11px;color:#9ca3af;padding:6px 0 4px;background:#f8fafc;border-top:1px solid #e5e7eb;">
+  運営: <a href="https://appadaycreator.com/" style="color:#9ca3af;text-decoration:none;">AppADayCreator</a> | <a href="https://tech-and-brace.co.jp/" rel="noopener" style="color:#9ca3af;text-decoration:none;">株式会社Tech&amp;Brace</a>
+</div>
+<script src="/assets/consent-mode.js"></script>
 </body>
 </html>
